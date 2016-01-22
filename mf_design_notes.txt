@@ -1,0 +1,23 @@
+Music Fiend Design Notes:
+
+*	MEAN Stack
+
+*	Layers
+	-	ndoejs
+	-	mongodb
+		**	node_mongodb_api
+		**	node_mongodb_job
+	-	express
+	-	angular
+	-	solr
+		**	node_solr_api
+		**	node_mongodb_job
+
+*	classes and functions
+	-	get_music
+		**	get music from musicbrainz api
+			--	write a js job that downloads music
+				1.	on demand
+				2.	by song; by query; etc.
+
+*			
