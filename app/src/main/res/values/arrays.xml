@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="nav_array">
+        <item>List</item>
+        <item>Grid</item>
+        <item>Pager</item>
+        <item>Blank</item>
+    </string-array>    
+</resources>

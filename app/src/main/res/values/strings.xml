@@ -1,3 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">MusicFiend</string>
+    <string name="app_name">Music Fiend</string>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close </string>
+    <string name="title_activity_make_note">Make Playlist</string>
+    <string name="title">Title</string>
+    <string name="NO_TIME">No Time</string>
+    <string name="NO_DATE">No Date</string>
+    <string name="trash">Trash</string>
+    <string name="archives">Archives</string>
+    <string name="helpandfeedback"><![CDATA[Help & FeedBack]]></string>
+    <string name="reminders">Reminders</string>
+    <string name="playlistOlds">Notes</string>
+    <string name="action_edit">Edit</string>
+    <string name="action_archive">Archive</string>
+    <string name="title_activity_google_drive_uploader">Send to Drive</string>
+    <string name="action_device">Store in device</string>
+    <string name="action_google_drive">Google Drive</string>
+    <string name="action_dropbox">Dropbox</string>
+    <string name="list_item">New item</string>
+    <string name="description">Description</string>
+    <string name="action_gallery">Choose from Gallery</string>
+    <string name="action_camera">Capture image</string>
+    <string name="settings">Drive Location Preference</string>
+    <string name="title_activity_list_files">List Files</string>
+    <string name="title_activity_base_demo">BaseDemo</string>
+    <string name="title_activity_create_file">CreateFile</string>
+    <string name="title_activity_online_photo_selection">Photo Selection</string>
+    <string name="title_activity_selection_drop_box">DropBox</string>
+    <string name="select">Select</string>
+    <string name="log_out">Log out</string>
+    <string name="save_location">Select</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="action_empty">Empty Trash</string>
+    <string name="new_directory">Create</string>
+    <string name="folder_name">Folder Name</string>
+    <string name="is_default">Currently selected default</string>
+
+    <!-- to be deleted later -->
+    <string name="action_settings">DELETE THIS</string>
+    <string name="title_activity_playlist">PlaylistActivity</string>
+    <string name="title_activity_maps">Map</string>
+
+    <string name="title_activity_login">Sign in</string>
+    <string name="title_text">Title</string>
+    <string name="desc_text">Description</string>
+
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Strings related to Settings -->
+    <string name="help_text">This is a really cool project</string>
+    <string name="action_add">Add</string>
+    <string name="action_delete">Delete</string>
+
+
+    <!-- Example General settings -->
+    <string name="pref_header_general">General</string>
+    <string name="pref_title_social_recommendations">Enable social recommendations</string>
+    <string name="pref_description_social_recommendations">Recommendations for people to contact based on your message history</string>
+    <string name="pref_title_display_name">Display name</string>
+    <string name="pref_default_display_name">John Smith</string>
+    <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
+
+    <string-array name="pref_example_list_titles">
+        <item>Always</item>
+        <item>When possible</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_example_list_values">
+        <item>1</item>
+        <item>0</item>
+        <item>-1</item>
+    </string-array>
+
+    <!-- Example settings for Data & Sync -->
+    <string name="pref_header_data_sync">Data &amp; sync</string>
+    <string name="pref_title_sync_frequency">Sync frequency</string>
+
+    <string-array name="pref_sync_frequency_titles">
+        <item>15 minutes</item>
+        <item>30 minutes</item>
+        <item>1 hour</item>
+        <item>3 hours</item>
+        <item>6 hours</item>
+        <item>Never</item>
+    </string-array>
+
+
+    <string name="action_sign_in_register"><b>Sign in</b> or register</string>
+
+    <string name="action_forgot_password">Recover lost password</string>
+    <string name="login_progress_signing_in">Signing in&#8230;</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+
+    <string-array name="pref_sync_frequency_values">
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>180</item>
+        <item>360</item>
+        <item>-1</item>
+    </string-array>
+
+    <string name="pref_title_system_sync_settings">System sync settings</string>
+
+    <!-- Example settings for Notifications -->
+    <string name="pref_header_notifications">Notifications</string>
+
+    <string name="pref_title_new_message_notifications">New message notifications</string>
+
+    <string name="pref_title_ringtone">Ringtone</string>
+    <string name="pref_ringtone_silent">Silent</string>
+
+    <string name="pref_title_vibrate">Vibrate</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <item name="opaque" type="color">#cc000000</item>
+    <item name="background" type="color">#616A7F</item>
+    <item name="opaque_background" type="color">#55616A7F</item>
+    <item name="background_light" type="color">#cccccc</item>
+    <item name="background_dark" type="color">#222222</item>
+
+
+
+    <string name="err_field_required">Error Field Required</string>
+
+
+
+    <!-- Main screen -->
+    <string name="activity_main_vertical_linear_sample_button">Vertical Linear Sample</string>
+    <string name="activity_main_horizontal_linear_sample_button">Horizontal Linear Sample</string>
+    <string name="activity_main_grid_sample_button">Grid Layout Sample</string>
+    <string name="activity_main_header">Expanding RecyclerView</string>
+    <string name="coming_soon">Feature coming soon</string>
+
+    <!-- Linear sample -->
+    <string name="activity_vertical_linear_sample_title">Vertical Linear Sample</string>
+    <string name="activity_horizontal_linear_sample_title">Horizontal Linear Sample</string>
+    <string name="toolbar_sample_checkBox">Custom Expand Button</string>
+    <string name="child_text">Child %1$d</string>
+    <string name="second_child_text">Child %1$d_2</string>
+    <string name="third_child_text">Child %1$d_3</string>
+    <string name="child_insert_text">Child of inserted #%1$d</string>
+    <string name="parent_text">Parent %1$d</string>
+    <string name="inserted_parent_text">Inserted Parent</string>
+    <string name="arrow_contentDescription">Expand list item arrow</string>
+    <string name="item_expanded">Item %1$d expanded</string>
+    <string name="item_collapsed">Item %1$d collapsed</string>
+    <string name="expand_parent_two">Expand parent 2</string>
+    <string name="collapse_parent_two">Collapse parent 2</string>
+    <string name="expand_all">Expand all parents</string>
+    <string name="collapse_all">Collapse all parents</string>
+    <string name="add_item_to_end">Add parent to end</string>
+    <string name="remove_item_from_end">Remove parent from end</string>
+    <string name="add_item_at_pos_two">Add parent @ pos 1</string>
+    <string name="remove_second_pos">Remove parent @ pos 1</string>
+    <string name="add_child">Add child to end of 2nd parent</string>
+    <string name="remove_child">Remove child on 2nd parent from pos 1</string>
+    <string name="added_child">Child Addition %1$d</string>
+    <string name="add_multiple_parents">Add 2 Parents @ pos 1</string>
+    <string name="modify_last_parent">Modify last Parent</string>
+    <string name="modify_last_child">Modify last Child</string>
+    <string name="modified_parent_text">modified %1$d</string>
+    <string name="modified_child_text">modified Child %1$d</string>
+    <string name="expand_range">Expand parents 4–6</string>
+    <string name="collapse_range">Collapse parents 2–5</string>
+    <string name="add_two_children">Add two children to last parent</string>
+    <string name="remove_two_children">Remove two children from last parent</string>
+    <string name="modify_two_children">Modify two children from last parent</string>
+    <string name="remove_two_parents">Remove last two Parents</string>
+    <string name="modify_two_parents">Modify last two Parents</string>
+    <string name="parent_move">Move parent @ pos 1 to pos 3</string>
+    <string name="child_move">On Parent @ pos 1, move child from pos 0 to end</string>
+
+
+    <string name="collapsed">collapsed: %s</string>
+    <string name="expanded">expanded: %s</string>
+
+
+    <!-- Sample Toolbar -->
+    <string name="no_animation">No animation</string>
+    <string name="spinner_adapter_time_s">1 s</string>
+    <string name="spinner_adapter_time_ms">%1$d ms</string>
+
+    <string name="google_app_id">musicfiend-1290</string>
+
 </resources>

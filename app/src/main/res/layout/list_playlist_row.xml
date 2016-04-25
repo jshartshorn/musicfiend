@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/list_row_selector"
+    android:padding="8dp" >
+
+    <!-- Thumbnail Image -->
+    <!--<com.android.volley.toolbox.NetworkImageView-->
+        <!--android:id="@+id/artwork1"-->
+        <!--android:layout_width="80dp"-->
+        <!--android:layout_height="80dp"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_marginRight="8dp" />-->
+
+    <!--  ListRow Left side Thumbnail image -->
+    <LinearLayout android:id="@+id/artwork_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="3dip"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/image_bg"
+        android:layout_marginRight="5dip">
+
+        <!--<com.android.volley.toolbox.NetworkImageView-->
+            <!--android:id="@+id/artwork"-->
+            <!--android:layout_width="50dip"-->
+            <!--android:layout_height="50dip"-->
+            <!--android:src="@drawable/no_image"/>-->
+
+        <ImageView
+            android:id="@+id/playlist_artwork"
+            android:layout_width="50dip"
+            android:layout_height="50dip"
+            android:src="@drawable/no_image"/>
+
+    </LinearLayout>
+
+    <!-- Title Of Playlist-->
+    <TextView
+        android:id="@+id/playlist_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/artwork_layout"
+        android:layout_toRightOf="@+id/artwork_layout"
+        android:text="Rihanna Love the way lie"
+        android:textColor="#040404"
+        android:typeface="sans"
+        android:textSize="15dip"
+        android:textStyle="bold"/>
+
+    <!--&lt;!&ndash; Artist Name &ndash;&gt;-->
+    <!--<TextView-->
+        <!--android:id="@+id/artist"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@id/title"-->
+        <!--android:textColor="#343434"-->
+        <!--android:textSize="10dip"-->
+        <!--android:layout_marginTop="1dip"-->
+        <!--android:layout_toRightOf="@+id/artwork_layout"-->
+        <!--android:text="Rihanna" />-->
+
+    <!-- Track Description -->
+    <TextView
+        android:id="@+id/playlist_description"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/playlist_title"
+        android:textColor="#343434"
+        android:textSize="10dip"
+        android:layout_marginTop="1dip"
+        android:layout_toRightOf="@+id/artwork_layout"
+        android:text="Just gona stand there and ..." />
+
+    <!--<TextView-->
+        <!--android:id="@+id/genre"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@id/description"-->
+        <!--android:textColor="#343434"-->
+        <!--android:textSize="10dip"-->
+        <!--android:layout_marginTop="1dip"-->
+        <!--android:layout_toRightOf="@+id/artwork_layout"-->
+        <!--android:text="pop,pop,pop" />-->
+
+    <!--&lt;!&ndash; Right end Duration &ndash;&gt;-->
+    <!--<TextView-->
+        <!--android:id="@+id/duration"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_alignTop="@id/title"-->
+        <!--android:gravity="right"-->
+        <!--android:text="5:45"-->
+        <!--android:layout_marginRight="5dip"-->
+        <!--android:textSize="10dip"-->
+        <!--android:textColor="#10bcc9"-->
+        <!--android:textStyle="bold"/>-->
+
+    <!--&lt;!&ndash; Right end Arrow &ndash;&gt;-->
+    <!--<ImageView android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:src="@drawable/arrow"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_centerVertical="true"/>-->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentLeft="false">
+
+        <ImageView
+            android:id="@+id/search_playlist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/ic_menu_search"
+            />
+
+        <!--<ImageView-->
+            <!--android:id="@+id/edit_playlist"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:src="@android:drawable/ic_menu_edit"-->
+            <!--/>-->
+
+        <ImageView
+            android:id="@+id/share_playlist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/ic_menu_share"
+        />
+
+        <!--<ImageView-->
+            <!--android:id="@+id/save_playlist"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:src="@android:drawable/ic_menu_save"-->
+             <!--/>-->
+
+        <ImageView
+            android:id="@+id/list_item_parent_horizontal_arrow_imageView"
+            android:layout_width="@dimen/list_item_parent_arrow_size"
+            android:layout_height="@dimen/list_item_parent_arrow_size"
+            android:layout_marginRight="@dimen/margin_medium"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/selector_arrow_down"
+            android:contentDescription="@string/arrow_contentDescription"/>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

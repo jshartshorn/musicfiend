@@ -1,0 +1,241 @@
+
+    [{
+        "id": "1",
+        "title": "myplaylist_demo1",
+        "description": "description",
+
+
+        "tracks": [
+                {
+                    "id": "1",
+                    "title": "Someone Like You",
+                    "description": "",
+                    "genre": ["Rap", "Rock", "Pop"],
+                    "username": "",
+                    "stream_url": "",
+                    "artist": "Adele",
+                    "duration": "4:47",
+                    "artwork_url": "http://api.androidhive.info/music/images/adele.png"
+                },
+                {
+                    "id": "2",
+                    "title": "Space Bound",
+                    "description": "",
+                    "genre": ["Rap", "Rock", "Pop"],
+                    "username": "",
+                    "stream_url": "",
+                    "artist": "Eminem",
+                    "duration": "4:38",
+                    "artwork_url": "http: //api.androidhive.info/music/images/eminem.png"
+                },
+                {
+                    "id": "3",
+                    "title": "Stranger In Moscow",
+                    "description": "",
+                    "genre": ["Rap", "Rock", "Pop"],
+                    "username": "",
+                    "stream_url": "",
+                    "artist": "Michael Jackson",
+                    "duration": "5:44",
+                    "artwork_url": "http://api.androidhive.info/music/images/mj.png"
+                },
+                {
+                    "id": "5",
+                    "title": "Khwaja Mere Khwaja",
+                    "description": "",
+                    "genre": ["Rap", "Rock", "Pop"],
+                    "username": "",
+                    "stream_url": "",
+                    "artist": "A R Rehman",
+                    "duration": "6:58",
+                    "artwork_url": "http: //api.androidhive.info/music/images/arrehman.png"
+                },
+                {
+                    "id": "6",
+                    "title": "All My Days",
+                    "description": "",
+                    "genre": ["Rap", "Rock", "Pop"],
+                    "username": "",
+                    "stream_url": "",
+                    "artist": "Alexi Murdoch",
+                    "duration": "4:47",
+                    "artwork_url": "http: //api.androidhive.info/music/images/alexi_murdoch.png"
+                }
+
+            ]
+        },
+        {
+            "id": "2",
+            "title": "myplaylist_demo2",
+            "description": "description",
+
+
+            "tracks": [
+                {
+                    "id": "1",
+                    "title": "Someone Like You",
+                    "description": "",
+                    "genre": ["Rap", "Rock", "Pop"],
+                    "username": "",
+                    "stream_url": "",
+                    "artist": "Adele",
+                    "duration": "4:47",
+                    "artwork_url": "http://api.androidhive.info/music/images/adele.png"
+                },
+                {
+                    "id": "2",
+                    "title": "Space Bound",
+                    "description": "",
+                    "genre": ["Rap", "Rock", "Pop"],
+                    "username": "",
+                    "stream_url": "",
+                    "artist": "Eminem",
+                    "duration": "4:38",
+                    "artwork_url": "http: //api.androidhive.info/music/images/eminem.png"
+                },
+                {
+                    "id": "3",
+                    "title": "Stranger In Moscow",
+                    "description": "",
+                    "genre": ["Rap", "Rock", "Pop"],
+                    "username": "",
+                    "stream_url": "",
+                    "artist": "Michael Jackson",
+                    "duration": "5:44",
+                    "artwork_url": "http://api.androidhive.info/music/images/mj.png"
+                },
+                {
+                    "id": "5",
+                    "title": "Khwaja Mere Khwaja",
+                    "description": "",
+                    "genre": ["Rap", "Rock", "Pop"],
+                    "username": "",
+                    "stream_url": "",
+                    "artist": "A R Rehman",
+                    "duration": "6:58",
+                    "artwork_url": "http: //api.androidhive.info/music/images/arrehman.png"
+                },
+                {
+                    "id": "6",
+                    "title": "All My Days",
+                    "description": "",
+                    "genre": ["Rap", "Rock", "Pop"],
+                    "username": "",
+                    "stream_url": "",
+                    "artist": "Alexi Murdoch",
+                    "duration": "4:47",
+                    "artwork_url": "http: //api.androidhive.info/music/images/alexi_murdoch.png"
+                },
+                {
+                    "id": "7",
+                    "title": "Life For Rent",
+                    "description": "",
+                    "genre": ["Rap", "Rock", "Pop"],
+                    "username": "",
+                    "stream_url": "",
+                    "artist": "Dido",
+                    "duration": "3:41",
+                    "artwork_url": "http://api.androidhive.info/music/images/dido.png"
+                },
+                {
+                    "id": "8",
+                    "title": "Love To See You Cry",
+                    "description": "",
+                    "genre": ["Rap", "Rock", "Pop"],
+                    "username": "",
+                    "stream_url": "",
+                    "artist": "Enrique Iglesias",
+                    "duration": "4:07",
+                    "artwork_url": "http: //api.androidhive.info/music/images/enrique.png"
+                },
+                {
+                    "id": "9",
+                    "title": "The Good, The Bad And The Ugly",
+                    "description": "",
+                    "genre": ["Rap", "Rock", "Pop"],
+                    "username": "",
+                    "stream_url": "",
+                    "artist": "Ennio Morricone",
+                    "duration": "2:42",
+                    "artwork_url": "http://api.androidhive.info/music/images/ennio.png"
+                },
+                {
+                    "id": "10",
+                    "title": "Show me the meaning",
+                    "description": "",
+                    "genre": ["Rap", "Rock", "Pop"],
+                    "username": "",
+                    "stream_url": "",
+                    "artist": "Backstreet Boys",
+                    "duration": "3:56",
+                    "artwork_url": "http: //api.androidhive.info/music/images/backstreet_boys.png"
+                },
+                {
+                    "id": "12",
+                    "title": "Space Bound",
+                    "description": "",
+                    "genre": ["Rap", "Rock", "Pop"],
+                    "username": "",
+                    "stream_url": "",
+                    "artist": "Eminem",
+                    "duration": "4:38",
+                    "artwork_url": "http: //api.androidhive.info/music/images/eminem.png"
+                },
+                {
+                    "id": "13",
+                    "title": "Stranger In Moscow",
+                    "description": "",
+                    "genre": ["Rap", "Rock", "Pop"],
+                    "username": "",
+                    "stream_url": "",
+                    "artist": "Michael Jackson",
+                    "duration": "5:44",
+                    "artwork_url": "http://api.androidhive.info/music/images/mj.png"
+                },
+                {
+                    "id": "14",
+                    "title": "Love The Way You Lie",
+                    "description": "",
+                    "genre": ["Rap", "Rock", "Pop"],
+                    "username": "",
+                    "stream_url": "",
+                    "artist": "Rihanna",
+                    "duration": "4:23",
+                    "artwork_url": "http: //api.androidhive.info/music/images/rihanna.png"
+                },
+                {
+                    "id": "16",
+                    "title": "All My Days",
+                    "description": "",
+                    "genre": ["Rap", "Rock", "Pop"],
+                    "username": "",
+                    "stream_url": "",
+                    "artist": "Alexi Murdoch",
+                    "duration": "4:47",
+                    "artwork_url": "http: //api.androidhive.info/music/images/alexi_murdoch.png"
+                },
+                {
+                    "id": "29",
+                    "title": "The Good, The Bad And The Ugly",
+                    "description": "",
+                    "genre": ["Rap", "Rock", "Pop"],
+                    "username": "",
+                    "stream_url": "",
+                    "artist": "Ennio Morricone",
+                    "duration": "2:42",
+                    "artwork_url": "http://api.androidhive.info/music/images/ennio.png"
+                },
+                {
+                    "id": "30",
+                    "title": "Show me the meaning",
+                    "description": "",
+                    "genre": ["Rap", "Rock", "Pop"],
+                    "username": "",
+                    "stream_url": "",
+                    "artist": "Backstreet Boys",
+                    "duration": "3:56",
+                    "artwork_url": "http://api.androidhive.info/music/images/backstreet_boys.png"
+                }
+            ]
+        }
+        ]
