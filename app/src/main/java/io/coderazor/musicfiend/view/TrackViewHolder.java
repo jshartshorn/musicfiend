@@ -10,7 +10,7 @@ import android.widget.Toast;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 
-import io.coderazor.musicfienddev.R;
+import io.coderazor.musicfiend.R;
 import io.coderazor.musicfiend.app.AppController;
 import io.coderazor.musicfiend.model.Track;
 

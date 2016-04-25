@@ -16,10 +16,10 @@ import android.widget.EditText;
 import java.util.ArrayList;
 import java.util.Random;
 
-import io.coderazor.musicfienddev.DataProvider;
-import io.coderazor.musicfienddev.R;
 import io.coderazor.musicfiend.model.Playlist;
 import io.coderazor.musicfiend.model.Track;
+import io.coderazor.musicfienddev.DataProvider;
+import io.coderazor.musicfienddev.R;
 
 //import com.appsrox.showcase.DataProvider;
 //import com.appsrox.showcase.model.Data;

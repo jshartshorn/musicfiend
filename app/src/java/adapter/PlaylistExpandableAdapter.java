@@ -11,12 +11,12 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
-import io.coderazor.musicfienddev.R;
 import io.coderazor.musicfiend.model.ParentListItem;
 import io.coderazor.musicfiend.model.Playlist;
 import io.coderazor.musicfiend.model.Track;
 import io.coderazor.musicfiend.view.PlaylistViewHolder;
 import io.coderazor.musicfiend.view.TrackViewHolder;
+import io.coderazor.musicfienddev.R;
 
 /**
  * Created by joelhartshorn on 4/23/16.

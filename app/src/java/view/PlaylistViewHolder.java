@@ -17,9 +17,9 @@ import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 
+import io.coderazor.musicfiend.model.Playlist;
 import io.coderazor.musicfienddev.DataProvider;
 import io.coderazor.musicfienddev.R;
-import io.coderazor.musicfiend.model.Playlist;
 
 /**
  * Created by joelhartshorn on 4/23/16.

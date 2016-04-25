@@ -1,10 +1,15 @@
 package io.coderazor.musicfiend.view;
 
+//import android.annotation.SuppressLint;
+//import android.app.Activity;
+
 import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.os.Build;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.RotateAnimation;
@@ -18,7 +23,8 @@ import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
 
 import io.coderazor.musicfiend.DataProvider;
-import io.coderazor.musicfienddev.R;
+import io.coderazor.musicfiend.R;
+import io.coderazor.musicfiend.TrackSearchDialogFragment;
 import io.coderazor.musicfiend.model.Playlist;
 
 /**
@@ -82,8 +88,13 @@ public class PlaylistViewHolder extends ParentViewHolder {
             @Override
             public void onClick(View v) {
                 Toast.makeText(mContext, "Search click", Toast.LENGTH_SHORT).show();
+                Context context = v.getContext();
                 //decide on method and choose
                 //savePlaylist(playlists.get(0));
+                FragmentManager fm = ((AppCompatActivity)context).getSupportFragmentManager();
+                TrackSearchDialogFragment searchDialogFragment = new TrackSearchDialogFragment();
+                //dialog.show(getSupportFragmentManager(), "AddPlaylistDialog");
+                searchDialogFragment.show(fm,"TrackSearchDialog");
             }
         });
 

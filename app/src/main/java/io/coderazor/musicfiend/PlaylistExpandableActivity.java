@@ -1,10 +1,9 @@
 package io.coderazor.musicfiend;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.ContentResolver;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +16,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.dropbox.client2.DropboxAPI;
+import com.dropbox.client2.android.AndroidAuthSession;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -25,6 +26,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import io.coderazor.musicfiend.adapter.ExpandableRecyclerAdapter;
 import io.coderazor.musicfiend.adapter.PlaylistExpandableAdapter;
@@ -35,9 +37,19 @@ import io.coderazor.musicfiend.view.AddPlaylistDialog;
 
 //import android.app.FragmentManager;
 
-public class PlaylistExpandableActivity extends Activity implements ExpandableRecyclerAdapter.ExpandCollapseListener {
+public class PlaylistExpandableActivity extends BaseActivity implements ExpandableRecyclerAdapter.ExpandCollapseListener {
     // Log tag
     private static final String LOG_NAME = PlaylistExpandableActivity.class.getSimpleName();
+
+    //various globals we need
+    private List<PlaylistOld> mPlaylistOlds;
+    private RecyclerView mRecyclerView;
+    private PlaylistAdapterOld mPlaylistAdapterOld;
+    private ContentResolver mContentResolver;
+    private static Boolean mIsInAuth;
+    public static Bitmap mSendingImage = null;
+    private boolean mIsImageNotFound = false;
+    private DropboxAPI<AndroidAuthSession> mDropboxAPI;
 
     // playlist json url
     private static final String url = "http://joel.hartshorn.com/playlist.json";
@@ -49,11 +61,24 @@ public class PlaylistExpandableActivity extends Activity implements ExpandableRe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_expandable_playlist);
+        setContentView(R.layout.activity_all_expand_layout);
+
+        //stuff we need from the old playlist
+        activateToolbar();
+        setUpForDropbox();
+        setUpNavigationDrawer();
+        setUpActions();
 
         //getActionBar();
         //getActionBar().show();
 
+        //now initialize the data for the activity
+        initPlaylist();
+
+
+    }
+
+    private void initPlaylist(){
         listView = (RecyclerView) findViewById(R.id.list);
         //search = (ImageView) findViewById(R.id.search_playlist);
         //share = (ImageView) findViewById(R.id.share_playlist);
@@ -69,21 +94,21 @@ public class PlaylistExpandableActivity extends Activity implements ExpandableRe
             @Override
             public void onListItemExpanded(int position) {
                 Playlist expandedPlaylist = playlists.get(position);
-                String toastMsg = getResources().getString(R.string.expanded, expandedPlaylist.getTitle());
-                Toast.makeText(PlaylistExpandableActivity.this,
-                        toastMsg,
-                        Toast.LENGTH_SHORT)
-                        .show();
+//                String toastMsg = getResources().getString(R.string.expanded, expandedPlaylist.getTitle());
+//                Toast.makeText(PlaylistExpandableActivity.this,
+//                        toastMsg,
+//                        Toast.LENGTH_SHORT)
+//                        .show();
             }
 
             @Override
             public void onListItemCollapsed(int position) {
                 Playlist collapsedPlaylist = playlists.get(position);
-                String toastMsg = getResources().getString(R.string.collapsed, collapsedPlaylist.getTitle());
-                Toast.makeText(PlaylistExpandableActivity.this,
-                        toastMsg,
-                        Toast.LENGTH_SHORT)
-                        .show();
+//                String toastMsg = getResources().getString(R.string.collapsed, collapsedPlaylist.getTitle());
+//                Toast.makeText(PlaylistExpandableActivity.this,
+//                        toastMsg,
+//                        Toast.LENGTH_SHORT)
+//                        .show();
             }
         });
 
@@ -95,8 +120,8 @@ public class PlaylistExpandableActivity extends Activity implements ExpandableRe
         pDialog.show();
 
         // changing action bar color
-        getActionBar().setBackgroundDrawable(
-                new ColorDrawable(Color.parseColor("#1b1b1b")));
+//        getActionBar().setBackgroundDrawable(
+//                new ColorDrawable(Color.parseColor("#1b1b1b")));
 
         // Creating volley request obj
         JsonArrayRequest playlistReq = new JsonArrayRequest(url,
@@ -174,10 +199,12 @@ public class PlaylistExpandableActivity extends Activity implements ExpandableRe
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(playlistReq);
 
-
-
         Log.d(LOG_NAME, "End on create...");
+    }
 
+    private void setUpForDropbox() {
+        AndroidAuthSession session = DropBoxActions.buildSession(getApplicationContext());
+        mDropboxAPI = new DropboxAPI<AndroidAuthSession>(session);
     }
 
     @Override
@@ -195,24 +222,25 @@ public class PlaylistExpandableActivity extends Activity implements ExpandableRe
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+//        Toast.makeText(PlaylistExpandableActivity.this,
+//                "option selected...",
+//                Toast.LENGTH_SHORT)
+//                .show();
         switch (item.getItemId()) {
-            case R.id.action_add:
-                //io.coderazor.musicfienddev.AddPlaylistDialog dialog = new io.coderazor.musicfienddev.AddPlaylistDialog();
-                //dialog.show(this.getSupportFragmentManager(), "AddPlaylistDialog");
-                //DialogFragment newFragment = io.coderazor.musicfienddev.AddPlaylistDialog.newInstance();
-                //newFragment.show(getFragmentManager(), "AddPlaylistDialog");
-                //AddPlaylistDialog newFragment = AddPlaylistDialog.
-                //newFragment.show(getFragmentManager(),"newone");
-
+            case R.id.add_playlist:
+//                Toast.makeText(PlaylistExpandableActivity.this,
+//                        "action add...",
+//                        Toast.LENGTH_SHORT)
+//                        .show();
                 AddPlaylistDialog dialog = new AddPlaylistDialog();
-                //dialog.show(getFragmentManager(), "AddPlaylistDialog");
-
-//                FragmentManager fm = getFragmentManager();
-//                DialogFragment newFragment = new AddPlaylistDialog();
-//                newFragment.show()
+                dialog.show(getSupportFragmentManager(), "AddPlaylistDialog");
                 return true;
 
             case R.id.action_settings:
+//                Toast.makeText(PlaylistExpandableActivity.this,
+//                        "action settings...",
+//                        Toast.LENGTH_SHORT)
+//                        .show();
                 startActivity(new Intent(this, SettingsActivity.class));
                 return true;
         }
@@ -231,7 +259,7 @@ public class PlaylistExpandableActivity extends Activity implements ExpandableRe
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.menu_playlists, menu);
         return true;
     }
 }

@@ -1,16 +1,6 @@
-package io.coderazor.musicfiend.app;
+package io.coderazor.musicfiend;
 
 public class AppConstant {
-
-
-    // Drop box
-    public static final String APP_KEY = "";//change this with drop box key
-    public static final String APP_SECRET = "";//change this with drop box secret key
-    public static final String ACCOUNT_PREFS_NAME = "prefs";
-    public static final String ACCESS_KEY_NAME = "ACCESS_KEY";
-    public static final String ACCESS_SECRET_NAME = "ACCESS_SECRET";
-    public static final String DROP_BOX_UPLOAD_PATH = "parent_dir_drop_box";
-    public static final String DROP_BOX_AUTH_BOOL = "drop_box_auth_bool";
 
 
     // Intent extras (parameters)
@@ -24,10 +14,10 @@ public class AppConstant {
     public static final String DATE_PICKER = "DATE_PICKER";
     public static final String NO_IMAGE = "no_image";
     public static final String NO_TIME = "No Time";
-    public static final String NO_ARCHIVES = "NO ARCHIVES";
-    public static final String NO_TRASH = "TRASH IS EMPTY";
+    //public static final String NO_ARCHIVES = "NO ARCHIVES";
+    //public static final String NO_TRASH = "TRASH IS EMPTY";
     public static final String EMPTY = "EMPTY";
-    public static final String EMPTY_TRASH = "Trash Empty";
+    //public static final String EMPTY_TRASH = "Trash Empty";
     public static final String PLAYLIST_PREFIX = "playlist_";
     public static final String PLAYLIST_OR_REMINDER = "PlaylistorReminder";
 
@@ -58,16 +48,16 @@ public class AppConstant {
 
     // Activity name
     public static final String PLAYLISTS = "My Playlists";
-    public static final String REMINDERS = "REMINDERS";
-    public static final String TRASH = "Trash";
+    //public static final String REMINDERS = "REMINDERS";
+    //public static final String TRASH = "Trash";
     public static final String SETTINGS = "Settings";
-    public static final String ARCHIVES = "Archives";
-    public static final String MAKE_REMINDER = "Make Reminder";
+    //public static final String ARCHIVES = "Archives";
+    //public static final String MAKE_REMINDER = "Make Reminder";
     public static final String MAKE_PLAYLISTS = "Make PlaylistOld";
 
     // Drawer labels
     public static final String DRAWER_PLAYLISTS = "My Playlists";
-    //public static final String DRAWER_REMINDERS = "Reminders";
+    public static final String DRAWER_EXPANDED_PLAYLIST = "My Playlists";
     //public static final String DRAWER_TRASH = "Trash";
     public static final String DRAWER_SETTINGS = "Settings";
     //public static final String DRAWER_ARCHIVES = "Archives";

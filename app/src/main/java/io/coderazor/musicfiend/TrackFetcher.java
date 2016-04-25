@@ -1,5 +1,6 @@
 package io.coderazor.musicfiend;
 
+
 import android.net.Uri;
 import android.util.Log;
 
@@ -14,6 +15,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
+import io.coderazor.musicfiend.model.Track;
 
 public class TrackFetcher {
     private static final String TAG = "TrackFetcher";

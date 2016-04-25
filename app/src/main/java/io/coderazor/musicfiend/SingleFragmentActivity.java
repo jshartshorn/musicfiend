@@ -3,11 +3,8 @@ package io.coderazor.musicfiend;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
 
-import io.coderazor.musicfiend.R;
-
-public abstract class SingleFragmentActivity extends AppCompatActivity {
+public abstract class SingleFragmentActivity extends BaseActivity {
 
     protected abstract Fragment createFragment();
 

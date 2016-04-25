@@ -7,6 +7,6 @@ public class TrackViewerActivity extends SingleFragmentActivity {
 
     @Override
     protected Fragment createFragment() {
-        return TrackViewerFragment.newInstance();
+        return TrackSearchDialogFragment.newInstance();
     }
 }

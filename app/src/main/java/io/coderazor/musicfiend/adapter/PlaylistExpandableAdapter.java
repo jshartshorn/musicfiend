@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
-import io.coderazor.musicfienddev.R;
+import io.coderazor.musicfiend.R;
 import io.coderazor.musicfiend.model.ParentListItem;
 import io.coderazor.musicfiend.model.Playlist;
 import io.coderazor.musicfiend.model.Track;

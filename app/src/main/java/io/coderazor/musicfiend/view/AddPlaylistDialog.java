@@ -17,13 +17,9 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import io.coderazor.musicfiend.DataProvider;
-import io.coderazor.musicfienddev.R;
+import io.coderazor.musicfiend.R;
 import io.coderazor.musicfiend.model.Playlist;
 import io.coderazor.musicfiend.model.Track;
-
-//import com.appsrox.showcase.DataProvider;
-//import com.appsrox.showcase.model.Data;
-//import com.appsrox.showcase.R;
 
 public class AddPlaylistDialog extends DialogFragment {
 

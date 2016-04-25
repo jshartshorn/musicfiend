@@ -6,7 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.Fragment;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -22,15 +22,17 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TrackViewerFragment extends Fragment {
+import io.coderazor.musicfiend.model.Track;
+
+public class TrackSearchDialogFragment extends DialogFragment {
     private static final String TAG = "TrackViewerFragment";
 
     private RecyclerView mTrackRecyclerView;
     private List<Track> mTracks = new ArrayList<>();
     private ThumbnailDownloader<TrackHolder> mThumbnailDownloader;
 
-    public static TrackViewerFragment newInstance() {
-        return new TrackViewerFragment();
+    public static TrackSearchDialogFragment newInstance() {
+        return new TrackSearchDialogFragment();
     }
 
     @Override
