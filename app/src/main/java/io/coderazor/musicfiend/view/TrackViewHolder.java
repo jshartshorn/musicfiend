@@ -28,7 +28,7 @@ public class TrackViewHolder extends ChildViewHolder {
     public TextView mGenre;
     public TextView mDescription;
     public ImageLoader mImageLoader = AppController.getInstance().getImageLoader();
-    public ImageView mPlay;
+    public ImageView mPlay, mAddTrack;
 
 
     private Context mContext;
@@ -47,10 +47,10 @@ public class TrackViewHolder extends ChildViewHolder {
         mGenre = (TextView) itemView.findViewById(R.id.genre);
         mDescription = (TextView) itemView.findViewById(R.id.track_description);
         mPlay = (ImageView) itemView.findViewById(R.id.play_arrow);
+        mAddTrack = (ImageView) itemView.findViewById(R.id.add_track_check);
 
     }
 
-    //todo...add onclick for items to bring up playlist
     public void bind(Track track) {
         //Toast.makeText(mContext, "Child bind for: "+track.getTitle(), Toast.LENGTH_SHORT).show();
         Log.d("TrackViewHolder","Child bind for: "+track.getTitle());
@@ -79,10 +79,18 @@ public class TrackViewHolder extends ChildViewHolder {
         mPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(LOG_NAME,"onClick");
+                Log.d(LOG_NAME,"onClick Play Track");
                 Toast.makeText(mContext, "Wire me up and playme...", Toast.LENGTH_SHORT).show();
             }
         });
+
+//        mAddTrack.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Log.d(LOG_NAME,"onClick Add Track");
+//                Toast.makeText(mContext, "Wire me up and add me to playlist...", Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
     }
 

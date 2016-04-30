@@ -1,13 +1,9 @@
 package io.coderazor.musicfiend;
 
-import android.app.Dialog;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.v7.app.AppCompatDialogFragment;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -19,55 +15,61 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.NetworkImageView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import io.coderazor.musicfiend.app.AppController;
 import io.coderazor.musicfiend.model.Track;
 import io.coderazor.musicfiend.util.TrackFetcher;
 
 
-public class TrackSearchDialogFragment extends AppCompatDialogFragment {
-    private static final String TAG = "TrackViewerFragment";
+public class TrackSearchFragment extends Fragment {
+    private static final String LOG_NAME = "TrackViewerFragment";
 
     private RecyclerView mTrackRecyclerView;
     private List<Track> mTracks = new ArrayList<>();
     private ThumbnailDownloader<TrackHolder> mThumbnailDownloader;
 
-    public static TrackSearchDialogFragment newInstance() {
-        return new TrackSearchDialogFragment();
+    public static TrackSearchFragment newInstance() {
+        return new TrackSearchFragment();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
         setRetainInstance(true);
         setHasOptionsMenu(true);
         updateItems();
 
-        Handler responseHandler = new Handler();
-        mThumbnailDownloader = new ThumbnailDownloader<>(responseHandler);
-        mThumbnailDownloader.setThumbnailDownloadListener(
-            new ThumbnailDownloader.ThumbnailDownloadListener<TrackHolder>() {
-                @Override
-                public void onThumbnailDownloaded(TrackHolder trackHolder, Bitmap bitmap) {
-                    Drawable drawable = new BitmapDrawable(getResources(), bitmap);
-                    trackHolder.bindDrawable(drawable);
-                }
-            }
-        );
-        mThumbnailDownloader.start();
-        mThumbnailDownloader.getLooper();
-        Log.i(TAG, "Background thread started");
+//        Handler responseHandler = new Handler();
+//        mThumbnailDownloader = new ThumbnailDownloader<>(responseHandler);
+//        mThumbnailDownloader.setThumbnailDownloadListener(
+//            new ThumbnailDownloader.ThumbnailDownloadListener<TrackHolder>() {
+//                @Override
+//                public void onThumbnailDownloaded(TrackHolder trackHolder, Bitmap bitmap) {
+//                    Drawable drawable = new BitmapDrawable(getResources(), bitmap);
+//                    trackHolder.bindDrawable(drawable);
+//                }
+//            }
+//        );
+//        mThumbnailDownloader.start();
+//        mThumbnailDownloader.getLooper();
+        Log.d(LOG_NAME, "Background thread started");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_track_viewer, container, false);
-        mTrackRecyclerView = (RecyclerView) v
-                 .findViewById(R.id.fragment_track_viewer_recycler_view);
-        //mTrackRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), 3));
+        mTrackRecyclerView = (RecyclerView)v.findViewById(R.id.fragment_track_viewer_recycler_view);
         mTrackRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         setupAdapter();
@@ -78,14 +80,14 @@ public class TrackSearchDialogFragment extends AppCompatDialogFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        mThumbnailDownloader.clearQueue();
+//        mThumbnailDownloader.clearQueue();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mThumbnailDownloader.quit();
-        Log.i(TAG, "Background thread destroyed");
+ //       mThumbnailDownloader.quit();
+        Log.d(LOG_NAME, "Background thread destroyed");
     }
 
     @Override
@@ -93,12 +95,16 @@ public class TrackSearchDialogFragment extends AppCompatDialogFragment {
         super.onCreateOptionsMenu(menu, menuInflater);
         menuInflater.inflate(R.menu.fragment_track_viewer, menu);
         MenuItem searchItem = menu.findItem(R.id.menu_item_search);
+        //searchItem.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+
+        //searchItem.expandActionView();
         final SearchView searchView = (SearchView) searchItem.getActionView();
+        //searchView.setIconifiedByDefault(false);
 
             searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                 @Override
                 public boolean onQueryTextSubmit(String s) {
-                    Log.d(TAG, "QueryTextSubmit: " + s);
+                    Log.d(LOG_NAME, "QueryTextSubmit: " + s);
                     QueryPreferences.setStoredQuery(getActivity(), s);
                     updateItems();
                     return true;
@@ -106,7 +112,7 @@ public class TrackSearchDialogFragment extends AppCompatDialogFragment {
 
                 @Override
                 public boolean onQueryTextChange(String s) {
-                    Log.d(TAG, "QueryTextChange: " + s);
+                    Log.d(LOG_NAME, "QueryTextChange: " + s);
                     return false;
                 }
             });
@@ -118,6 +124,7 @@ public class TrackSearchDialogFragment extends AppCompatDialogFragment {
                 searchView.setQuery(query, false);
             }
         });
+
     }
 
     @Override
@@ -144,26 +151,54 @@ public class TrackSearchDialogFragment extends AppCompatDialogFragment {
     }
 
     private class TrackHolder extends RecyclerView.ViewHolder {
-        private ImageView mItemImageView;
+        //private ImageView mItemImageView;
+        public NetworkImageView mArtwork;
+        public TextView mTitle;
+        public TextView mArtist;
+        public TextView mGenre;
+        public TextView mDuration;
+        public TextView mDescription;
+        public ImageLoader mImageLoader = AppController.getInstance().getImageLoader();
+        public ImageView mPlay;
+
+        private Context mContext;
 
         public TrackHolder(View itemView) {
             super(itemView);
 
-            mItemImageView = (ImageView) itemView
-                    .findViewById(R.id.fragment_track_viewer_image_view);
+            mContext = itemView.getContext();
+
+            if (mImageLoader == null)
+                mImageLoader = AppController.getInstance().getImageLoader();
+            mArtwork = (NetworkImageView) itemView.findViewById(R.id.track_artwork);
+            mTitle = (TextView) itemView.findViewById(R.id.track_title);
+            mArtist = (TextView) itemView.findViewById(R.id.track_artist);
+            mGenre = (TextView) itemView.findViewById(R.id.genre);
+            mDescription = (TextView) itemView.findViewById(R.id.track_description);
+            mDuration = (TextView) itemView.findViewById(R.id.track_duration);
+            mPlay = (ImageView) itemView.findViewById(R.id.play_arrow);
+
+//            mItemImageView = (ImageView) itemView
+//                    .findViewById(R.id.fragment_track_viewer_image_view);
         }
 
-        public void bindDrawable(Drawable drawable) {
-            mItemImageView.setImageDrawable(drawable);
-        }
+//        public void bindDrawable(Drawable drawable) {
+//            mItemImageView.setImageDrawable(drawable);
+//        }
     }
 
     private class TrackAdapter extends RecyclerView.Adapter<TrackHolder> {
 
+        private String LOG_NAME = "Frag.TrackAdapter";
+
         private List<Track> mTracks;
+
+        private Context mContext;
+
 
         public TrackAdapter(List<Track> tracks) {
             mTracks = tracks;
+            mContext = getContext();
         }
 
         @Override
@@ -176,9 +211,38 @@ public class TrackSearchDialogFragment extends AppCompatDialogFragment {
         @Override
         public void onBindViewHolder(TrackHolder trackHolder, int position) {
             Track track = mTracks.get(position);
-            Drawable placeholder = getResources().getDrawable(R.drawable.no_image);
-            trackHolder.bindDrawable(placeholder);
-            mThumbnailDownloader.queueThumbnail(trackHolder, track.getArtworkURL());
+            Log.d(LOG_NAME,"onBindViewHolder for: "+track.getTitle());
+
+            // thumbnail image
+            trackHolder.mArtwork.setImageUrl(track.getArtworkURL(), trackHolder.mImageLoader);
+
+            // title
+            trackHolder.mTitle.setText(track.getTitle());
+
+            // artist
+            trackHolder.mArtist.setText("Artist: " + String.valueOf(track.getArtist()));
+
+            trackHolder.mDuration.setText(String.valueOf(track.getDuration()));
+
+            // genre
+//            String genreStr = "";
+//            for (String str : track.getGenre()) {
+//                genreStr += str + ", ";
+//            }
+//            genreStr = genreStr.length() > 0 ? genreStr.substring(0,
+//                    genreStr.length() - 2) : genreStr;
+//            trackHolder.mGenre.setText(genreStr);
+
+            // description
+            trackHolder.mDescription.setText(String.valueOf(track.getDescription()));
+
+            trackHolder.mPlay.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d(LOG_NAME,"onClick");
+                    //Toast.makeText(mContext, "Wire me up and playme...", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
 
         @Override
@@ -213,34 +277,6 @@ public class TrackSearchDialogFragment extends AppCompatDialogFragment {
 
     }
 
-    @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-//        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-//        // Get the layout inflater
-//        LayoutInflater inflater = getActivity().getLayoutInflater();
-//
-//        // Inflate and set the layout for the dialog
-//        // Pass null as the parent view because its going in the dialog layout
-//        builder.setView(inflater.inflate(R.layout.list_track_viewer, null))
-//                // Add action buttons
-//                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int id) {
-//                        // sign in the user ...
-//                    }
-//                })
-//                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int id) {
-//                        TrackSearchDialogFragment.this.getDialog().cancel();
-//                    }
-//                });
-//        return builder.create();
-        return super.onCreateDialog(savedInstanceState);
 
-    }
 
-    @Override
-    public void setupDialog(Dialog dialog, int style) {
-        super.setupDialog(dialog, style);
-    }
 }

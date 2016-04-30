@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/prompt_email"
                 android:inputType="textEmailAddress"
-                android:text="email@example.com"
+                android:text="demo@example.com"
                 android:maxLines="1"
                 android:singleLine="true" />
 

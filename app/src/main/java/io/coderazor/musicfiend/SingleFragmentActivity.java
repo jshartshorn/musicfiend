@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
+import io.coderazor.musicfiend.app.BaseActivity;
+
 public abstract class SingleFragmentActivity extends BaseActivity {
 
     protected abstract Fragment createFragment();

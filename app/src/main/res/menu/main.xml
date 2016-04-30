@@ -6,7 +6,8 @@
         android:orderInCategory="2"
         myapp:showAsAction="ifRoom"
         android:icon="@android:drawable/ic_menu_add"
-        android:title="@string/action_add"/>
+        android:title="@string/action_add"
+        android:visible="false"/>
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"

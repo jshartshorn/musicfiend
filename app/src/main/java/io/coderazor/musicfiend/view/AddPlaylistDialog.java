@@ -16,7 +16,7 @@ import android.widget.EditText;
 import java.util.ArrayList;
 import java.util.Random;
 
-import io.coderazor.musicfiend.DataProvider;
+import io.coderazor.musicfiend.data.DataProvider;
 import io.coderazor.musicfiend.R;
 import io.coderazor.musicfiend.model.Playlist;
 import io.coderazor.musicfiend.model.Track;
@@ -66,7 +66,7 @@ public class AddPlaylistDialog extends DialogFragment {
 
                             Playlist playlist = new Playlist();
 
-                            playlist.setID(rand);
+                            playlist.setId(rand);
                             playlist.setTitle(title);
                             playlist.setDescription(desc);
                             playlist.setTracks(new ArrayList<Track>());

@@ -5,13 +5,17 @@
     android:background="@drawable/list_row_selector"
     android:padding="8dp" >
 
-    <!-- Thumbnail Image -->
-    <!--<com.android.volley.toolbox.NetworkImageView-->
-        <!--android:id="@+id/artwork1"-->
-        <!--android:layout_width="80dp"-->
-        <!--android:layout_height="80dp"-->
+    <!--<ImageView-->
+        <!--android:background="@color/musicfiendImageBackground"-->
+        <!--android:src="@drawable/ic_loading"-->
+        <!--android:visibility="invisible"-->
+        <!--android:id="@+id/image_playlist_custom_home"-->
+        <!--android:layout_width="150dp"-->
         <!--android:layout_alignParentLeft="true"-->
-        <!--android:layout_marginRight="8dp" />-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_centerInParent="true"-->
+        <!--android:baselineAlignBottom="true"-->
+        <!--android:layout_height="150dp" />-->
 
     <!--  ListRow Left side Thumbnail image -->
     <LinearLayout android:id="@+id/artwork_layout"
@@ -22,17 +26,11 @@
         android:background="@drawable/image_bg"
         android:layout_marginRight="5dip">
 
-        <!--<com.android.volley.toolbox.NetworkImageView-->
-            <!--android:id="@+id/artwork"-->
-            <!--android:layout_width="50dip"-->
-            <!--android:layout_height="50dip"-->
-            <!--android:src="@drawable/no_image"/>-->
-
         <ImageView
             android:id="@+id/playlist_artwork"
             android:layout_width="50dip"
             android:layout_height="50dip"
-            android:src="@drawable/no_image"/>
+            android:src="@drawable/mf_round"/>
 
     </LinearLayout>
 
@@ -49,18 +47,6 @@
         android:textSize="15dip"
         android:textStyle="bold"/>
 
-    <!--&lt;!&ndash; Artist Name &ndash;&gt;-->
-    <!--<TextView-->
-        <!--android:id="@+id/artist"-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@id/title"-->
-        <!--android:textColor="#343434"-->
-        <!--android:textSize="10dip"-->
-        <!--android:layout_marginTop="1dip"-->
-        <!--android:layout_toRightOf="@+id/artwork_layout"-->
-        <!--android:text="Rihanna" />-->
-
     <!-- Track Description -->
     <TextView
         android:id="@+id/playlist_description"
@@ -73,37 +59,6 @@
         android:layout_toRightOf="@+id/artwork_layout"
         android:text="Just gona stand there and ..." />
 
-    <!--<TextView-->
-        <!--android:id="@+id/genre"-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@id/description"-->
-        <!--android:textColor="#343434"-->
-        <!--android:textSize="10dip"-->
-        <!--android:layout_marginTop="1dip"-->
-        <!--android:layout_toRightOf="@+id/artwork_layout"-->
-        <!--android:text="pop,pop,pop" />-->
-
-    <!--&lt;!&ndash; Right end Duration &ndash;&gt;-->
-    <!--<TextView-->
-        <!--android:id="@+id/duration"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:layout_alignTop="@id/title"-->
-        <!--android:gravity="right"-->
-        <!--android:text="5:45"-->
-        <!--android:layout_marginRight="5dip"-->
-        <!--android:textSize="10dip"-->
-        <!--android:textColor="#10bcc9"-->
-        <!--android:textStyle="bold"/>-->
-
-    <!--&lt;!&ndash; Right end Arrow &ndash;&gt;-->
-    <!--<ImageView android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:src="@drawable/arrow"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:layout_centerVertical="true"/>-->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -117,29 +72,13 @@
             android:id="@+id/search_playlist"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@android:drawable/ic_menu_search"
-            />
-
-        <!--<ImageView-->
-            <!--android:id="@+id/edit_playlist"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:src="@android:drawable/ic_menu_edit"-->
-            <!--/>-->
+            android:src="@android:drawable/ic_menu_search" />
 
         <ImageView
-            android:id="@+id/share_playlist"
+            android:id="@+id/delete_playlist"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@android:drawable/ic_menu_share"
-        />
-
-        <!--<ImageView-->
-            <!--android:id="@+id/save_playlist"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:src="@android:drawable/ic_menu_save"-->
-             <!--/>-->
+            android:src="@android:drawable/ic_menu_delete" />
 
         <ImageView
             android:id="@+id/list_item_parent_horizontal_arrow_imageView"
@@ -152,5 +91,11 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/id_playlist_custom_home"
+        android:visibility="visible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Here is the magic box"/>
 
 </RelativeLayout>

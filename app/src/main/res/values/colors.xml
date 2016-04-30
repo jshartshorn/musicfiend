@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-    <color name="musicfiendPrimaryBackgroundColor">#009688</color>
-    <color name="musicfiendSecondaryBackgroundColor">#004D40</color>
-    <color name="musicfiendColorBackgroundAccent">#FF9922</color>
-    <color name="musicfiendBackgroundColor">#FAFAFA</color>
-    <color name="musicfiendPrimaryTextColor">#FAFAFA</color>
+    <color name="musicfiendPrimaryBackgroundColor">#b50000</color>
+    <color name="musicfiendSecondaryBackgroundColor">#990202</color>
+    <color name="musicfiendColorBackgroundAccent">#990202</color>
+    <color name="musicfiendBackgroundColor">#FFFFFF</color>
+    <color name="musicfiendPrimaryTextColor">#FFFFFF</color>
     <color name="musicfiendBody">#FAFAFA</color>
     <color name="musicfiendCardBody">#EBEBEB</color>
-    <color name="musicfiendSecondaryTextColor">#656565</color>
+    <color name="musicfiendSecondaryTextColor">#FFFFFF</color>
     <color name="musicfiendDropBoxSeparator">#C1C1C1</color>
     <color name="musicfiendSelectionTickColor">#455EDE</color>
     <color name="musicfiendImageBackground">#C1C1C1</color>
@@ -21,7 +21,7 @@
     <color name="list_row_hover_start_color">#ebeef0</color>
     <color name="list_row_hover_end_color">#ebeef0</color>
 
-    <color name="primary_green">#6a8136</color>
+    <color name="primary_green">#b50000</color>
     <color name="white">#FFFFFF</color>
     <color name="background_card">#FEFEFE</color>
 

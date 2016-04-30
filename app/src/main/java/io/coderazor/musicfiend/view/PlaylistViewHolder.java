@@ -8,8 +8,6 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.os.Build;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.RotateAnimation;
@@ -22,9 +20,8 @@ import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 
-import io.coderazor.musicfiend.DataProvider;
+import io.coderazor.musicfiend.data.DataProvider;
 import io.coderazor.musicfiend.R;
-import io.coderazor.musicfiend.TrackSearchDialogFragment;
 import io.coderazor.musicfiend.model.Playlist;
 
 /**
@@ -44,9 +41,10 @@ public class PlaylistViewHolder extends ParentViewHolder {
     //items for playlist
     public TextView mTitle;
     public TextView mDescription;
+    public TextView mId;
 
-    private ImageView mSearch;
-    private ImageView mShare;
+    public ImageView mSearch;
+    public ImageView mShare;
 
     private Context mContext;
 
@@ -57,8 +55,7 @@ public class PlaylistViewHolder extends ParentViewHolder {
         mTitle = (TextView) itemView.findViewById(R.id.playlist_title);
         mDescription = (TextView) itemView.findViewById(R.id.playlist_description);
         mSearch = (ImageView) itemView.findViewById(R.id.search_playlist);
-        mShare = (ImageView) itemView.findViewById(R.id.share_playlist);
-
+        mId = (TextView) itemView.findViewById(R.id.id_playlist_custom_home);
 
         mArrowExpandImageView = (ImageView) itemView.findViewById(R.id.list_item_parent_horizontal_arrow_imageView);
         mArrowExpandImageView.setOnClickListener(new View.OnClickListener() {
@@ -84,28 +81,28 @@ public class PlaylistViewHolder extends ParentViewHolder {
             }
         });
 
-        mSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(mContext, "Search click", Toast.LENGTH_SHORT).show();
-                Context context = v.getContext();
-                //decide on method and choose
-                //savePlaylist(playlists.get(0));
-                FragmentManager fm = ((AppCompatActivity)context).getSupportFragmentManager();
-                TrackSearchDialogFragment searchDialogFragment = new TrackSearchDialogFragment();
-                //dialog.show(getSupportFragmentManager(), "AddPlaylistDialog");
-                searchDialogFragment.show(fm,"TrackSearchDialog");
-            }
-        });
-
-        mShare.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(mContext, "Share click", Toast.LENGTH_SHORT).show();
-                //decide on method and choose
-                //savePlaylist(playlists.get(0));
-            }
-        });
+//        mSearch.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(mContext, "Search click", Toast.LENGTH_SHORT).show();
+//                Context context = v.getContext();
+//                //decide on method and choose
+//                //savePlaylist(playlists.get(0));
+////                FragmentManager fm = ((AppCompatActivity)context).getSupportFragmentManager();
+////                TrackSearchDialogFragment searchDialogFragment = new TrackSearchDialogFragment();
+////                //dialog.show(getSupportFragmentManager(), "AddPlaylistDialog");
+////                searchDialogFragment.show(fm,"TrackSearchDialog");
+//            }
+//        });
+//
+//        mShare.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(mContext, "Share click", Toast.LENGTH_SHORT).show();
+//                //decide on method and choose
+//                //savePlaylist(playlists.get(0));
+//            }
+//        });
     }
 
     @Override
@@ -148,12 +145,13 @@ public class PlaylistViewHolder extends ParentViewHolder {
         Log.d("PlayListViewHolder","onbind for: "+ playlist.getTitle());
         mDescription.setText(playlist.getDescription());
         mTitle.setText(playlist.getTitle());
+        mId.setText(String.valueOf(playlist.getId()));
     }
 
     public void savePlaylist(ArrayList<Playlist> playlists){
         //save to db
         //wonder if we should just save to prefs
-        //need to serialize ojbect and persist given the shared pref type
+        //need to serialize object and persist given the shared pref type
         //Toast.makeText( getApplicationContext(), "savePlaylist").show();
 
         ContentResolver cr = mContext.getContentResolver();

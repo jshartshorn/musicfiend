@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
+import io.coderazor.musicfiend.util.TrackFetcher;
+
 public class ThumbnailDownloader<T> extends HandlerThread {
     private static final String TAG = "ThumbnailDownloader";
     private static final int MESSAGE_DOWNLOAD = 0;
@@ -48,7 +50,7 @@ public class ThumbnailDownloader<T> extends HandlerThread {
     }
 
     public void queueThumbnail(T target, String url) {
-        Log.i(TAG, "Got a URL: " + url);
+        Log.d(TAG, "Got a URL: " + url);
 
         if (url == null) {
             mRequestMap.remove(target);

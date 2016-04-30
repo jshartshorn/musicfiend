@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="io.coderazor.musicfiend" >
+    package="io.coderazor.musicfiend">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -13,116 +13,123 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
-        android:name="io.coderazor.musicfiend.app.AppController"
+        android:name=".app.AppController"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/Theme.MusicFiend" >
+        android:theme="@style/Theme.MusicFiend">
         <activity
             android:name=".LoginActivity"
-            android:label="Login" >
-        </activity>
+            android:label="Login"></activity>
         <activity
             android:name=".SplashActivity"
-            android:label="Splash" >
+            android:label="Music Fiend">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".PlaylistActivityOld"
-            android:label="@string/playlistOlds" >
+            android:name=".PlaylistActivity"
+            android:label="@string/playlistOlds">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <meta-data android:name="android.app.default_searchable"
+
+            <meta-data
+                android:name="android.app.default_searchable"
                 android:value=".SearchableActivity" />
         </activity>
         <activity
-            android:name=".PlaylistExpandableActivity"
-            android:label="@string/playlistOlds" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            <meta-data android:name="android.app.default_searchable"
+            android:name=".PlaylistActivityOld"
+            android:label="@string/playlistOlds">
+            <meta-data
+                android:name="android.app.default_searchable"
                 android:value=".SearchableActivity" />
         </activity>
         <activity
             android:name=".TrackViewerActivity"
             android:label="Search Tracks">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
-            <meta-data android:name="android.app.default_searchable"
-                android:value=".SearchableActivity" />
         </activity>
-        <activity android:name=".SearchableActivity"
+        <activity
+            android:name=".SearchableActivity"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
-
-            <meta-data
-                android:name="android.app.searchable"
-                android:resource="@xml/searchable" />
         </activity>
         <activity
             android:name=".PlaylistDetailActivityOld"
-            android:label="@string/title_activity_make_note" >
-        </activity>
+            android:label="@string/title_activity_make_playlist"></activity>
+        <activity
+            android:name=".PlaylistDetailActivity"
+            android:label="@string/title_activity_make_playlist"></activity>
         <activity
             android:name=".HelpFeedActivity"
             android:label="@string/helpandfeedback"
-            android:noHistory="true" >
+            android:noHistory="false">
         </activity>
         <activity
             android:name=".GoogleDriveSelectionActivity"
-            android:label="@string/title_activity_list_files" >
+            android:label="@string/title_activity_list_files">
         </activity>
         <activity
-            android:name=".AppAuthenticationActivity"
-            android:label="@string/title_activity_online_photo_selection"
+            android:name=".app.AppAuthenticationActivity"
+            android:label="Authentication"
             android:noHistory="true"
-            android:parentActivityName=".PlaylistActivityOld" >
-        </activity>
+            android:parentActivityName=".PlaylistActivityOld"></activity>
         <activity
             android:name=".GoogleDriveDirectoryNameGetterActivity"
-            android:label="@string/title_activity_online_photo_selection"
+            android:label="Google"
             android:noHistory="true"
-            android:parentActivityName=".PlaylistActivityOld" >
-        </activity>
+            android:parentActivityName=".PlaylistActivityOld"></activity>
         <activity
-            android:name=".DropBoxPickerActivity"
-            android:label="@string/title_activity_selection_drop_box" >
-        </activity>
+            android:name=".dropbox.DropBoxPickerActivity"
+            android:label="@string/title_activity_selection_drop_box"></activity>
         <activity
             android:name="com.dropbox.client2.android.AuthActivity"
             android:configChanges="orientation|keyboard"
-            android:launchMode="singleTask" >
+            android:launchMode="singleTask">
             <intent-filter>
                 <data android:scheme="db-xy0d49wvq6hekwc" />
-
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.BROWSABLE" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
+
         <provider
-            android:name=".AppProvider"
+            android:name=".data.DataProvider"
             android:authorities="io.coderazor.musicfiend.provider"
             android:exported="true"
             android:readPermission="io.coderazor.musicfiend.provider.READWRITE"
             android:writePermission="io.coderazor.musicfiend.provideer.READWRITE" />
 
+        <!--<provider-->
+            <!--android:name=".app.AppProvider"-->
+            <!--android:authorities="io.coderazor.provider"-->
+            <!--android:exported="true"-->
+            <!--android:readPermission="io.coderazor.provider.READWRITE"-->
+            <!--android:writePermission="io.coderazor.provideer.READWRITE" />-->
+
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
+        <activity android:name=".TrackSearchActivity"
+            android:label="Search Tracks"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:value=".SearchableActivity"
+                android:resource="@xml/searchable"/>
+        </activity>
     </application>
 
 </manifest>

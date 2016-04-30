@@ -139,25 +139,7 @@ public class PlaylistViewHolder extends ParentViewHolder {
         mTitle.setText(playlist.getTitle());
     }
 
-    public void savePlaylist(ArrayList<Playlist> playlists){
-        //save to db
-        //wonder if we should just save to prefs
-        //need to serialize ojbect and persist given the shared pref type
-        //Toast.makeText( getApplicationContext(), "savePlaylist").show();
 
-        ContentResolver cr = mContext.getContentResolver();
-        try {
-            Gson gson = new Gson();
-            String json = gson.toJson(playlists, new TypeToken<ArrayList<Playlist>>() {}.getType());
-
-            ContentValues cv = new ContentValues(1);
-            cv.put(DataProvider.COL_CONTENT, json.toString());
-            cr.insert(DataProvider.CONTENT_URI_DATA, cv);
-
-        } catch (Exception e) {
-            Log.e(LOG_NAME,"Error: "+e.getStackTrace());
-        }
-    }
 
     @SuppressLint("NewApi")
     @Override
