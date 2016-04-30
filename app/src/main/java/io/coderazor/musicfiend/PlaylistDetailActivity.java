@@ -91,13 +91,13 @@ public class PlaylistDetailActivity extends BaseActivity
         this.mBundle = savedInstanceState;
         setContentView(R.layout.activity_expandable_detail_playlist_layout);
         activateToolbarWithHomeEnabled();
-        if (getIntent().getStringExtra(AppConstant.LIST_PLAYLISTS) != null) {
-            initializeComponents(LIST);
-        } else {
+//        if (getIntent().getStringExtra(AppConstant.LIST_PLAYLISTS) != null) {
+//            initializeComponents(LIST);
+//        } else {
             initializeComponents(NORMAL);
-        }
+//        }
 
-        setUpIfEditing();
+        //setUpIfEditing();
         if (getIntent().getStringExtra(AppConstant.GO_TO_CAMERA) != null) {
             callCamera();
         }

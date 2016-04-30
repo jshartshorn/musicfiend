@@ -31,19 +31,12 @@
         </activity>
         <activity
             android:name=".PlaylistActivity"
-            android:label="@string/playlistOlds">
+            android:label="@string/playlists">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
-            <meta-data
-                android:name="android.app.default_searchable"
-                android:value=".SearchableActivity" />
-        </activity>
-        <activity
-            android:name=".PlaylistActivityOld"
-            android:label="@string/playlistOlds">
             <meta-data
                 android:name="android.app.default_searchable"
                 android:value=".SearchableActivity" />
@@ -60,9 +53,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".PlaylistDetailActivityOld"
-            android:label="@string/title_activity_make_playlist"></activity>
-        <activity
             android:name=".PlaylistDetailActivity"
             android:label="@string/title_activity_make_playlist"></activity>
         <activity
@@ -78,12 +68,12 @@
             android:name=".app.AppAuthenticationActivity"
             android:label="Authentication"
             android:noHistory="true"
-            android:parentActivityName=".PlaylistActivityOld"></activity>
+            android:parentActivityName=".PlaylistActivity"></activity>
         <activity
             android:name=".GoogleDriveDirectoryNameGetterActivity"
             android:label="Google"
             android:noHistory="true"
-            android:parentActivityName=".PlaylistActivityOld"></activity>
+            android:parentActivityName=".PlaylistActivity"></activity>
         <activity
             android:name=".dropbox.DropBoxPickerActivity"
             android:label="@string/title_activity_selection_drop_box"></activity>
@@ -101,14 +91,14 @@
 
 
         <provider
-            android:name=".data.DataProvider"
+            android:name="io.coderazor.musicfiend.data.DataProvider"
             android:authorities="io.coderazor.musicfiend.provider"
             android:exported="true"
             android:readPermission="io.coderazor.musicfiend.provider.READWRITE"
             android:writePermission="io.coderazor.musicfiend.provideer.READWRITE" />
 
         <!--<provider-->
-            <!--android:name=".app.AppProvider"-->
+            <!--android:name="io.coderazor.musicfiend.app.AppProvider"-->
             <!--android:authorities="io.coderazor.provider"-->
             <!--android:exported="true"-->
             <!--android:readPermission="io.coderazor.provider.READWRITE"-->

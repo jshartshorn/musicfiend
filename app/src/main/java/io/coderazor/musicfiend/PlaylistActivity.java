@@ -62,15 +62,13 @@ import io.coderazor.musicfiend.dropbox.DropBoxActions;
 import io.coderazor.musicfiend.model.Playlist;
 import io.coderazor.musicfiend.model.Track;
 
-//import android.app.FragmentManager;
-
 public class PlaylistActivity extends BaseActivity implements ExpandableRecyclerAdapter.ExpandCollapseListener,
         PlaylistAdapter.PlaylistSearchClickCallback, PlaylistAdapter.PlayTrackClickCallback,
         LoaderManager.LoaderCallbacks<Cursor>, GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener {
+
     // Log tag
     private static final String LOG_NAME = PlaylistActivity.class.getSimpleName();
-
 
 
     //various globals we need
@@ -89,9 +87,6 @@ public class PlaylistActivity extends BaseActivity implements ExpandableRecycler
     // todo this will eventually load from db...
     private static final String url = AppConstant.LOCAL_DEV_JSON_URL;
     private ProgressDialog pDialog;
-    //private ArrayList<Playlist> playlists = new ArrayList<Playlist>();
-    //private RecyclerView listView;
-    //private PlaylistAdapter adapter;
     private ImageView mStorageSelection;
     private Toolbar mToolbar;
     //private Menu
@@ -168,13 +163,14 @@ public class PlaylistActivity extends BaseActivity implements ExpandableRecycler
             @Override
             public void onListItemExpanded(int position) {
                 Playlist expandedPlaylist = mPlaylists.get(position);
+                showToast("Expand");
 
             }
 
             @Override
             public void onListItemCollapsed(int position) {
                 Playlist collapsedPlaylist = mPlaylists.get(position);
-
+                showToast("Collapse");
             }
         });
 
@@ -526,17 +522,11 @@ public class PlaylistActivity extends BaseActivity implements ExpandableRecycler
     @Override
     public void searchPlaylist(int position, ArrayList<Track> tracks) {
         Log.d(LOG_NAME, "searchPlaylist");
-        Toast.makeText(PlaylistActivity.this,
-                "searchPlaylist",
-                Toast.LENGTH_SHORT)
-                .show();
-
         //intent with fragment
 //        TrackSearchDialogFragment dialog = new TrackSearchDialogFragment();
 //        dialog.setMenuVisibility(true);
 //        dialog.setHasOptionsMenu(true);
 //        dialog.show(getSupportFragmentManager(), "TrackSearchDialog");
-
 
         //intent with activity
 //        Intent intent = new Intent(getApplicationContext(), TrackViewerActivity.class);
@@ -544,11 +534,17 @@ public class PlaylistActivity extends BaseActivity implements ExpandableRecycler
 //        intent.putExtra(AppConstant.PLAYLIST_OR_REMINDER, mTitle);
 //        startActivity(intent);
 
-        //intent not of this world
-        Intent intent = new Intent(getApplicationContext(), HelpFeedActivity.class);
-        intent.putExtra(AppConstant.GO_TO_CAMERA, AppConstant.TRUE);
-        intent.putExtra(AppConstant.PLAYLIST_OR_REMINDER, mTitle);
+        //intent with activity
+        Intent intent = new Intent(getApplicationContext(), TrackSearchActivity.class);
+        //intent.putExtra(AppConstant., AppConstant.TRUE);
+        intent.putExtra(AppConstant.PLAYLISTS, mTitle);
         startActivity(intent);
+
+        //intent not of this world
+//        Intent intent = new Intent(getApplicationContext(), HelpFeedActivity.class);
+//        intent.putExtra(AppConstant.GO_TO_CAMERA, AppConstant.TRUE);
+//        intent.putExtra(AppConstant.PLAYLIST_OR_REMINDER, mTitle);
+//        startActivity(intent);
 
     }
 
@@ -592,22 +588,21 @@ public class PlaylistActivity extends BaseActivity implements ExpandableRecycler
     }
 
     private void edit(View view) {
-//        Intent intent = new Intent(PlaylistActivity.this, PlaylistDetailActivity.class);
-//        String id = ((TextView) view.findViewById(R.id.id_playlist_custom_home)).getText().toString();
-//        intent.putExtra(AppConstant.ID, id);
-//        LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.home_list);
-//        int isList = linearLayout.getVisibility();
-//        if (isList == View.VISIBLE) {
-//            intent.putExtra(AppConstant.LIST, AppConstant.TRUE);
-//        }
-//        ImageView tempImageView = (ImageView) view.findViewById(R.id.image_playlist_custom_home);
+        Intent intent = new Intent(PlaylistActivity.this, PlaylistDetailActivity.class);
+        String id = ((TextView) view.findViewById(R.id.id_playlist_custom_home)).getText().toString();
+        intent.putExtra(AppConstant.ID, id);
+        //LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.home_list);
+        //int isList = linearLayout.getVisibility();
+        //if (isList == View.VISIBLE) {
+            intent.putExtra(AppConstant.NORMAL, AppConstant.TRUE);
+        //}
+        //ImageView tempImageView = (ImageView) view.findViewById(R.id.image_playlist_custom_home);
 //        if(tempImageView.getDrawable() != null) {
 //            mSendingImage = ((BitmapDrawable) tempImageView.getDrawable()).getBitmap();
 //        }
-//        startActivity(intent);
+        startActivity(intent);
     }
 
-    //TODO: just add the persisitence piece with the data provider
     private void add(View view, Integer position) {
         //addTestData(false);
         String newId = this.savePlaylistToDB(mPlaylists.get(position));
@@ -647,10 +642,6 @@ public class PlaylistActivity extends BaseActivity implements ExpandableRecycler
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-        //dapter.swapCursor(data);
-        //should be able to get json here
-
-        //ArrayList<Playlist> playlists = new ArrayList<Playlist>();
         int count =0;
         if (cursor.moveToFirst()) {
             do {
@@ -662,16 +653,11 @@ public class PlaylistActivity extends BaseActivity implements ExpandableRecycler
             } while (cursor.moveToNext());
         }
         cursor.close();
-        //return data;
-        //mPlaylists = playlists;
-        //mPlaylistAdapter.notifyParentItemRangeInserted(1,mPlaylists.size()-1);
-        //mPlaylistAdapter.notifyDataSetChanged();
-
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
-        //adapter.swapCursor(null);
+
         loader = null;
     }
 

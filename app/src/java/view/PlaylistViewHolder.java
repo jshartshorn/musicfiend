@@ -1,8 +1,6 @@
 package io.coderazor.musicfiend.view;
 
 import android.annotation.SuppressLint;
-import android.content.ContentResolver;
-import android.content.ContentValues;
 import android.content.Context;
 import android.os.Build;
 import android.util.Log;
@@ -12,13 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.util.ArrayList;
-
 import io.coderazor.musicfiend.model.Playlist;
-import io.coderazor.musicfienddev.DataProvider;
 import io.coderazor.musicfienddev.R;
 
 /**

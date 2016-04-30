@@ -46,8 +46,6 @@ public class TrackSearchActivity extends BaseActivity {
 
         mContext = getApplicationContext();
 
-
-
         mTrackRecyclerView = (RecyclerView) findViewById(R.id.track_list_search);
         mTrackRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
@@ -109,7 +107,7 @@ public class TrackSearchActivity extends BaseActivity {
             public boolean onQueryTextSubmit(String s) {
                 Log.d(LOG_NAME, "QueryTextSubmit: " + s);
                 QueryPreferences.setStoredQuery(mContext, s);
-                //updateItems();
+                updateItems();
                 return true;
             }
 

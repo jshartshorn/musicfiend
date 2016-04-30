@@ -56,7 +56,7 @@ public class AppConstant {
     public static final String SETTINGS = "Settings";
     //public static final String ARCHIVES = "Archives";
     //public static final String MAKE_REMINDER = "Make Reminder";
-    public static final String MAKE_PLAYLISTS = "Make PlaylistOld";
+    public static final String MAKE_PLAYLISTS = "Add Playlist";
 
     // Drawer labels
     public static final String DRAWER_PLAYLISTS = "My Playlists";
