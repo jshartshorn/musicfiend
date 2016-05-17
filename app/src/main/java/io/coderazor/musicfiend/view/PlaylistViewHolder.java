@@ -45,6 +45,7 @@ public class PlaylistViewHolder extends ParentViewHolder {
 
     public ImageView mSearch;
     public ImageView mShare;
+    public ImageView mTrash;
 
     private Context mContext;
 
@@ -55,6 +56,7 @@ public class PlaylistViewHolder extends ParentViewHolder {
         mTitle = (TextView) itemView.findViewById(R.id.playlist_title);
         mDescription = (TextView) itemView.findViewById(R.id.playlist_description);
         mSearch = (ImageView) itemView.findViewById(R.id.search_playlist);
+        mTrash = (ImageView) itemView.findViewById(R.id.delete_playlist);
         mId = (TextView) itemView.findViewById(R.id.id_playlist_custom_home);
 
         mArrowExpandImageView = (ImageView) itemView.findViewById(R.id.list_item_parent_horizontal_arrow_imageView);
@@ -144,7 +146,7 @@ public class PlaylistViewHolder extends ParentViewHolder {
         //Toast.makeText(mContext, "Parent bind for: "+playlist.getTitle(), Toast.LENGTH_SHORT).show();
         Log.d("PlayListViewHolder","onbind for: "+ playlist.getTitle());
         mDescription.setText(playlist.getDescription());
-        mTitle.setText(playlist.getTitle());
+        mTitle.setText(playlist.getTitle());//+playlist.getId());
         mId.setText(String.valueOf(playlist.getId()));
     }
 

@@ -7,30 +7,53 @@
         android:id="@+id/app_bar"
         layout="@layout/toolbar" />
 
-    <!--<SearchView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:id="@+id/searchView" />-->
+    <!--add in a custom cardview to display playlist information-->
+    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view"
+        android:layout_gravity="top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="15dp"
+        card_view:cardCornerRadius="4dp"
+        android:layout_below="@id/app_bar"
+        android:visibility="visible">
 
-    <!--<android.support.v7.widget.RecyclerView-->
-        <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
-        <!--android:id="@+id/track_list_search"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_marginTop="30dp"/>-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <!--<android.support.v7.widget.Toolbar-->
-        <!--android:id="@+id/app_bar"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="?attr/actionBarSize"-->
-        <!--android:background="?attr/colorPrimary"/>-->
+
+            <LinearLayout
+                android:id="@+id/action_item_container"
+                android:layout_centerHorizontal="true"
+                android:layout_width="match_parent"
+                android:padding="5dp"
+                android:layout_height="wrap_content">
+
+                <!--this is the custom action bar-->
+                <TextView
+                    android:id="@+id/playlist_info"
+                    android:visibility="visible"
+                    android:textColor="@color/musicfiendColorBackgroundAccent"
+                    android:textSize="@dimen/home_title"
+                    android:gravity="center"
+                    android:text="Add music to playlist (count etc)"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
 
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/track_list_search"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/app_bar"
+        android:layout_below="@id/card_view"
         android:clipToPadding="false"/>
 
 

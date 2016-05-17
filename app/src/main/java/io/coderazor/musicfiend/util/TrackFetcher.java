@@ -4,6 +4,8 @@ package io.coderazor.musicfiend.util;
 import android.net.Uri;
 import android.util.Log;
 
+import com.google.gson.Gson;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,6 +18,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.coderazor.musicfiend.app.AppConstant;
 import io.coderazor.musicfiend.model.Track;
 
 public class TrackFetcher {
@@ -38,11 +41,8 @@ public class TrackFetcher {
     private static final Uri ENDPOINT = Uri
             .parse("http://ws.audioscrobbler.com/2.0/?")
             .buildUpon()
-            //.appendQueryParameter("track", "json")
             .appendQueryParameter("api_key", API_KEY)
             .appendQueryParameter("format", "json")
-            //.appendQueryParameter("nojsoncallback", "1")
-            //.appendQueryParameter("extras", "url_s")
             .build();
 
     public byte[] getUrlBytes(String urlSpec) throws IOException {
@@ -133,24 +133,37 @@ public class TrackFetcher {
             throws IOException, JSONException {
 
         JSONArray trackJsonArray = jsonBody.getJSONArray("track");
+        Gson gson = new Gson();
 
         for (int i = 0; i < trackJsonArray.length(); i++) {
             JSONObject trackJsonObject = trackJsonArray.getJSONObject(i);
             JSONObject imageJsonOjbect = trackJsonObject.getJSONArray("image").getJSONObject(1);
 
-            Track item = new Track();
+            ArrayList<String> defaultGenre = new ArrayList<String>();
+            defaultGenre.add("default");
+
+            //ArrayList<String> defaultGenre = gson.fromJson(AppConstant.DEFAULT_TRACK_GENRE_JSON, new TypeToken<ArrayList<String>>() {}.getType());
+
+            //setup a base track object from defaults then see if the external provider has more info
+            Track item = new Track(AppConstant.DEFAULT_TRACK_ID, AppConstant.DEFAULT_TRACK_TITLE,
+                    AppConstant.DEFAULT_TRACK_DESCRIPTION, AppConstant.DEFAULT_TRACK_DURATION, AppConstant.DEFAULT_TRACK_ARTIST,
+                    defaultGenre, AppConstant.DEFAULT_TRACK_URL,AppConstant.DEFAULT_TRACK_URL,
+                    AppConstant.DEFAULT_TRACK_URL);
+
             item.setId(trackJsonObject.getString("mbid"));
             item.setTitle(trackJsonObject.getString("name"));
             item.setArtworkURL(imageJsonOjbect.getString("#text"));
             item.setPrimaryURL(trackJsonObject.getString("url"));
-            //item.setDuration(trackJsonObject.getString("duration"));
-            //item.setArtist(trackJsonObject.getJSONObject("artist").getString("name"));
+            if(trackJsonObject.has("artist")) {
+                item.setArtist(trackJsonObject.getString("artist"));
+            }
+            if(trackJsonObject.has("genre")) {
+                //item.setGenre(gson.fromJson(trackJsonObject.getString("genre").toString(), new TypeToken<ArrayList<String>>() {}.getType()));
+            }
+            if(trackJsonObject.has("duration")) {
+                item.setArtist(trackJsonObject.getString("duration"));
+            }
 
-//            if (!trackJsonObject.has("url_s")) {
-//                continue;
-//            }
-//
-//            item.setUrl(trackJsonObject.getString("url_s"));
             items.add(item);
         }
     }

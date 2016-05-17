@@ -142,7 +142,7 @@ public class DataProvider extends ContentProvider {
     protected static final class DbHelper extends SQLiteOpenHelper {
 
         private static final String DATABASE_NAME = "musicfiend.db";
-        private static final int DATABASE_VERSION = 10;
+        private static final int DATABASE_VERSION = 15;
 
         private static final String SQL_CREATE_DATA = "create table data (_id integer primary key autoincrement, content text);";
 

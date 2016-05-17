@@ -58,22 +58,22 @@ public class PlaylistViewHolder extends ParentViewHolder {
             }
         });
 
-        mContext = itemView.getContext();
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(mContext, "This is where we should add the dialog for the note...", Toast.LENGTH_SHORT).show();
-                //essentially
-                //....show note dialog
-                //....save note
-                //....call notify
-            }
-        });
+//        mContext = itemView.getContext();
+//        itemView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                //Toast.makeText(mContext, "This is where we should add the dialog for the note...", Toast.LENGTH_SHORT).show();
+//                //essentially
+//                //....show note dialog
+//                //....save note
+//                //....call notify
+//            }
+//        });
 
         mSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, "Search click", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(mContext, "Search click", Toast.LENGTH_SHORT).show();
                 //decide on method and choose
                 //savePlaylist(playlists.get(0));
             }
@@ -82,7 +82,7 @@ public class PlaylistViewHolder extends ParentViewHolder {
         mShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, "Share click", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(mContext, "Share click", Toast.LENGTH_SHORT).show();
                 //decide on method and choose
                 //savePlaylist(playlists.get(0));
             }

@@ -6,6 +6,19 @@ public class AppConstant {
     //urls for retrieving json files
     public static final String LOCAL_DEV_JSON_URL = "http://joel.hartshorn.com/playlist.json";
 
+    //default types for playlist
+    public static final String PLAYLIST_SERIALIZE = "PLAYLIST_SERIALIZE";
+
+    //default types for track
+    public static final String DEFAULT_TRACK_ID = "0";
+    public static final String DEFAULT_TRACK_GENRE_JSON = "{\"all\",\"indie\"}";
+    public static final String DEFAULT_TRACK_URL = "No Url";
+    public static final String DEFAULT_TRACK_ARTIST = "No Artist";
+    public static final String DEFAULT_TRACK_DESCRIPTION = "No Description";
+    public static final String DEFAULT_TRACK_TITLE = "No Title";
+    public static final String DEFAULT_TRACK_DURATION = "000";
+
+
     // Intent extras (parameters)
     public static final String REMINDER = "reminder";
     public static final String GO_TO_CAMERA = "camera";
@@ -17,10 +30,7 @@ public class AppConstant {
     public static final String DATE_PICKER = "DATE_PICKER";
     public static final String NO_IMAGE = "no_image";
     public static final String NO_TIME = "No Time";
-    //public static final String NO_ARCHIVES = "NO ARCHIVES";
-    //public static final String NO_TRASH = "TRASH IS EMPTY";
     public static final String EMPTY = "EMPTY";
-    //public static final String EMPTY_TRASH = "Trash Empty";
     public static final String PLAYLIST_PREFIX = "playlist_";
     public static final String PLAYLIST_OR_REMINDER = "PlaylistorReminder";
 
@@ -51,19 +61,13 @@ public class AppConstant {
 
     // Activity name
     public static final String PLAYLISTS = "My Playlists";
-    //public static final String REMINDERS = "REMINDERS";
-    //public static final String TRASH = "Trash";
     public static final String SETTINGS = "Settings";
-    //public static final String ARCHIVES = "Archives";
-    //public static final String MAKE_REMINDER = "Make Reminder";
     public static final String MAKE_PLAYLISTS = "Add Playlist";
 
     // Drawer labels
     public static final String DRAWER_PLAYLISTS = "My Playlists";
     public static final String DRAWER_EXPANDED_PLAYLIST = "My Playlists";
-    //public static final String DRAWER_TRASH = "Trash";
     public static final String DRAWER_SETTINGS = "Settings";
-    //public static final String DRAWER_ARCHIVES = "Archives";
     public static final String DRAWER_HELP_AND_FEEDBACK = "Help & Feedback";
 
     // Google drive

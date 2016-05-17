@@ -69,21 +69,21 @@ public class PlaylistExpandableActivity extends Activity implements ExpandableRe
             @Override
             public void onListItemExpanded(int position) {
                 Playlist expandedPlaylist = playlists.get(position);
-                String toastMsg = getResources().getString(R.string.expanded, expandedPlaylist.getTitle());
-                Toast.makeText(PlaylistExpandableActivity.this,
-                        toastMsg,
-                        Toast.LENGTH_SHORT)
-                        .show();
+//                String toastMsg = getResources().getString(R.string.expanded, expandedPlaylist.getTitle());
+//                Toast.makeText(PlaylistExpandableActivity.this,
+//                        toastMsg,
+//                        Toast.LENGTH_SHORT)
+//                        .show();
             }
 
             @Override
             public void onListItemCollapsed(int position) {
                 Playlist collapsedPlaylist = playlists.get(position);
-                String toastMsg = getResources().getString(R.string.collapsed, collapsedPlaylist.getTitle());
-                Toast.makeText(PlaylistExpandableActivity.this,
-                        toastMsg,
-                        Toast.LENGTH_SHORT)
-                        .show();
+//                String toastMsg = getResources().getString(R.string.collapsed, collapsedPlaylist.getTitle());
+//                Toast.makeText(PlaylistExpandableActivity.this,
+//                        toastMsg,
+//                        Toast.LENGTH_SHORT)
+//                        .show();
             }
         });
 
@@ -113,36 +113,11 @@ public class PlaylistExpandableActivity extends Activity implements ExpandableRe
                                 JSONObject obj = response.getJSONObject(i);
                                 Playlist playlist = new Playlist();
                                 playlist.setTitle(obj.getString("title"));
-                                //track.setArtworkURL(obj.getString("artwork_url"));
                                 playlist.setDescription(obj.getString("description"));
-                                //track.setArtist(obj.getString("artist"));
 
                                 Gson gson = new Gson();
-                                //Track tracks[] = gson.fromJson(obj.getString("tracks"), Track[].class);
-
-//                                Type listOfTestObject = new TypeToken<List<TestObject>>(){}.getType();
-//                                String s = gson.toJson(list, listOfTestObject);
-//                                List<TestObject> list2 = gson.fromJson(s, listOfTestObject);
 
                                 ArrayList<Track> tracks = gson.fromJson(obj.getString("tracks"), new TypeToken<ArrayList<Track>>() {}.getType());
-                                //adapter.notifyChildItemRangeInserted(i,0,tracks.size());
-                                Toast.makeText(PlaylistExpandableActivity.this,
-                                        "There are: "+tracks.size()+" tracks in this playlist: "+playlist.getTitle(),
-                                        Toast.LENGTH_SHORT)
-                                        .show();
-//                                // tracks is json array
-                                //JSONArray tracks = obj.getJSONArray("tracks");
-                                //ArrayList<Track> tracks = new ArrayList<Track>();
-                                for (int j = 0; j < tracks.size(); j++) {
-                                    //genre.add((String) genreArry.get(j));
-//                                    Track track = new Track();
-//                                    track.setArtist(tracks[j]);
-//                                    track.setDescription();
-//                                    track.setArtworkURL();
-                                    //adapter.notifyChildItemInserted(i,j);
-                                }
-                                playlist.setTracks(tracks);
-                                //adapter.notifyChildItemRangeInserted(i,1,tracks.size());
 
                                 // adding track to tracks array
                                 playlists.add(playlist);
@@ -156,10 +131,6 @@ public class PlaylistExpandableActivity extends Activity implements ExpandableRe
 
                         }
 
-                        // notifying list adapter about data changes
-                        // so that it renders the list view with updated data
-                        //adapter.notifyDataSetChanged();
-                        //adapter.notifyParentItemInserted(1);
                     }
                 }, new Response.ErrorListener() {
             @Override

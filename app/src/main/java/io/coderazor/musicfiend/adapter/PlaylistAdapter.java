@@ -36,13 +36,22 @@ public class PlaylistAdapter extends ExpandableRecyclerAdapter<PlaylistViewHolde
     //declare callbacks and listener interfaces
     PlaylistSearchClickCallback mSearchPlaylistClickCallback;
     PlayTrackClickCallback mPlayTrackClickCallback;
+    PlaylistDeleteClickCallback mPlaylistDeleteClickCallback;
 
+    /*
+        Purpose: interface to enable communication around playlist and tracks
+     */
     public interface PlaylistSearchClickCallback{
         public void searchPlaylist(int position, ArrayList<Track> tracks);
+        public void searchPlaylist(int position, Playlist playlist);
     }
 
     public interface PlayTrackClickCallback{
         public void playTrack(Track track);
+    }
+
+    public interface PlaylistDeleteClickCallback{
+        public void deletePlaylist(Integer playistId, Integer position);
     }
 
     /**
@@ -50,12 +59,13 @@ public class PlaylistAdapter extends ExpandableRecyclerAdapter<PlaylistViewHolde
      *
      * @param parentItemList the list of parent items to be displayed in the RecyclerView
      */
-    public PlaylistAdapter(Context context, List<? extends ParentListItem> parentItemList, PlayTrackClickCallback playTrackCallback, PlaylistSearchClickCallback searchCallback) {
+    public PlaylistAdapter(Context context, List<? extends ParentListItem> parentItemList, PlayTrackClickCallback playTrackCallback, PlaylistSearchClickCallback searchCallback, PlaylistDeleteClickCallback deletePlaylistCallback) {
         super(parentItemList);
         mInflater = LayoutInflater.from(context);
 
         this.mSearchPlaylistClickCallback = searchCallback;
         this.mPlayTrackClickCallback = playTrackCallback;
+        this.mPlaylistDeleteClickCallback = deletePlaylistCallback;
     }
 
     public PlaylistAdapter(@NonNull List<? extends ParentListItem> parentItemList) {
@@ -267,51 +277,40 @@ public class PlaylistAdapter extends ExpandableRecyclerAdapter<PlaylistViewHolde
     }
 
     @Override
-    public void onBindParentViewHolder(PlaylistViewHolder parentViewHolder, int position, ParentListItem parentListItem) {
+    public void onBindParentViewHolder(PlaylistViewHolder parentViewHolder, final int position, ParentListItem parentListItem) {
         Log.d(LOG_NAME,"onBindParentViewHolder");
-        Playlist playlist = (Playlist) parentListItem;
+        final Playlist playlist = (Playlist) parentListItem;
         parentViewHolder.bind(playlist);
 
         parentViewHolder.mSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Toast.makeText(v.getContext(), "Playlist Search clicked: ", Toast.LENGTH_SHORT).show();
                 Log.d(LOG_NAME, "Playlist Search clicked:");
                 if (mSearchPlaylistClickCallback!=null) {
-                    mSearchPlaylistClickCallback.searchPlaylist(1,new ArrayList<Track>());
+                    mSearchPlaylistClickCallback.searchPlaylist(position,playlist);
                 }
 
 
             }
         });
 
-//        parentViewHolder.mTrash.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                Toast.makeText(v.getContext(), "Playlist Trash clicked: ", Toast.LENGTH_SHORT).show();
-//                Log.d(LOG_NAME, "Playlist Search clicked:");
-//                if (mSearchPlaylistClickCallback!=null) {
-//                    mSearchPlaylistClickCallback.searchPlaylist(1,new ArrayList<Track>());
-//                }
-//
-//
-//            }
-//        });
+        parentViewHolder.mTrash.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Toast.makeText(v.getContext(), "Playlist Trash clicked: ", Toast.LENGTH_SHORT).show();
+                Log.d(LOG_NAME, "Playlist Trash clicked:");
+                //delete(position);
+                if (mPlaylistDeleteClickCallback!=null) {
+                    mPlaylistDeleteClickCallback.deletePlaylist(playlist.getId(), position);
+                }
+
+            }
+        });
 
 
-//        vhMovie.ivMovie.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                //Toast.makeText(v.getContext(), "Movie Image Item Clicked: " + position, Toast.LENGTH_SHORT).show();
-//                Log.i(LOG_NAME, "Movie Image Item Clicked");
-//                if (mClickCallback!=null) {
-//                    mClickCallback.movieItemClick(position);
-//                }
-//
-//            }
-//        });
+
     }
 
     @Override

@@ -20,12 +20,16 @@ import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import io.coderazor.musicfiend.app.AppConstant;
 import io.coderazor.musicfiend.app.AppController;
 import io.coderazor.musicfiend.app.BaseActivity;
+import io.coderazor.musicfiend.model.Playlist;
 import io.coderazor.musicfiend.model.Track;
 import io.coderazor.musicfiend.util.TrackFetcher;
 
@@ -36,6 +40,14 @@ public class TrackSearchActivity extends BaseActivity {
     private RecyclerView mTrackRecyclerView;
     private List<Track> mTracks = new ArrayList<>();
     private ThumbnailDownloader<TrackHolder> mThumbnailDownloader;
+    private TextView mPlaylistInfo;
+    private Integer mTrackCount = 0;
+    private String mPlaylistTitle = "";
+    private Integer mPlaylistId = 0;
+
+
+    //this is the playlist used to do the search
+    private Playlist mPlaylist;
 
     private Context mContext;
 
@@ -46,8 +58,24 @@ public class TrackSearchActivity extends BaseActivity {
 
         mContext = getApplicationContext();
 
+        mPlaylistInfo = (TextView) findViewById(R.id.playlist_info);
         mTrackRecyclerView = (RecyclerView) findViewById(R.id.track_list_search);
         mTrackRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+
+        if (getIntent().hasExtra(AppConstant.PLAYLIST_SERIALIZE)) {
+            String json = getIntent().getStringExtra(AppConstant.PLAYLIST_SERIALIZE);
+            mPlaylist = new Playlist(json);
+            mPlaylistTitle = mPlaylist.getTitle();
+            mPlaylistId = mPlaylist.getId();
+            mTrackCount = mPlaylist.getTracks().size();
+            Log.d(LOG_NAME,"Get playlist for search.");
+        }
+
+
+
+        if(mPlaylist!= null) {
+            setPlaylistInfo();
+        }
 
         setupAdapter();
 
@@ -56,6 +84,10 @@ public class TrackSearchActivity extends BaseActivity {
         activateToolbar();
 
 
+    }
+
+    private void setPlaylistInfo(){
+        mPlaylistInfo.setText("Playlist: " + mPlaylistTitle + " Track Count: " + mTrackCount.toString());
     }
 
     @Override
@@ -139,6 +171,7 @@ public class TrackSearchActivity extends BaseActivity {
         public TextView mDescription;
         public ImageLoader mImageLoader = AppController.getInstance().getImageLoader();
         public ImageView mPlay;
+        public ImageView mAddToPlaylist;
 
         private Context mContext;
 
@@ -156,6 +189,7 @@ public class TrackSearchActivity extends BaseActivity {
             mDescription = (TextView) itemView.findViewById(R.id.track_description);
             mDuration = (TextView) itemView.findViewById(R.id.track_duration);
             mPlay = (ImageView) itemView.findViewById(R.id.play_arrow);
+            mAddToPlaylist = (ImageView) itemView.findViewById(R.id.add_track_check);
 
 //            mItemImageView = (ImageView) itemView
 //                    .findViewById(R.id.fragment_track_viewer_image_view);
@@ -188,8 +222,8 @@ public class TrackSearchActivity extends BaseActivity {
         }
 
         @Override
-        public void onBindViewHolder(TrackHolder trackHolder, int position) {
-            Track track = mTracks.get(position);
+        public void onBindViewHolder(TrackHolder trackHolder, final int position) {
+            final Track track = mTracks.get(position);
             Log.d(LOG_NAME,"onBindViewHolder for: "+track.getTitle());
 
             // thumbnail image
@@ -218,8 +252,24 @@ public class TrackSearchActivity extends BaseActivity {
             trackHolder.mPlay.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.d(LOG_NAME,"onClick");
-                    //Toast.makeText(mContext, "Wire me up and playme...", Toast.LENGTH_SHORT).show();
+                    Log.d(LOG_NAME,"Play onClick");
+                    //showToast("Wire me up and playme...");
+                }
+            });
+
+            trackHolder.mAddToPlaylist.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d(LOG_NAME,"AddToPlaylist onClick");
+                    showToast("Add To Playlist Click" +position);
+                    addToPlaylist(mPlaylistId,track);
+                    mTracks.remove(position);
+                    notifyItemRemoved(position);
+                    notifyDataSetChanged();
+                    mTrackCount++;
+                    setPlaylistInfo();
+
+
                 }
             });
         }
@@ -253,6 +303,29 @@ public class TrackSearchActivity extends BaseActivity {
             mTracks = tracks;
             setupAdapter();
         }
+
+    }
+
+    private void addToPlaylist(Integer id, String trackJson){
+
+        //easier to just add and then delete
+        //although edit will require findById...
+        Gson gson = new Gson();
+        Track track = gson.fromJson(trackJson, new TypeToken<Track>() {}.getType());
+
+        addToPlaylist(id,track);
+
+    }
+
+    private void addToPlaylist(Integer id, Track track){
+
+        Playlist playlist = getPlaylistFromDB(id);
+        playlist.getTracks().add(track);
+        updatePlaylistToDB(playlist);
+
+        //ok deleting was dumb since it resets the id ... just run update
+        //deletePlaylistFromDB(id);
+        //savePlaylistToDB(playlist);
 
     }
 

@@ -13,103 +13,93 @@ android:padding="8dp" >
         android:scaleType="centerCrop"
         android:visibility="gone"/>
 
+    <!--  ListRow Left side Thumbnail image -->
+    <LinearLayout android:id="@+id/artwork_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="3dip"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/image_bg"
+        android:layout_marginRight="5dip">
 
+        <com.android.volley.toolbox.NetworkImageView
+            android:id="@+id/track_artwork"
+            android:layout_width="50dip"
+            android:layout_height="50dip"
+            android:src="@drawable/rihanna"/>
 
-<!-- Thumbnail Image -->
-<!--<com.android.volley.toolbox.NetworkImageView-->
-<!--android:id="@+id/artwork1"-->
-<!--android:layout_width="80dp"-->
-<!--android:layout_height="80dp"-->
-<!--android:layout_alignParentLeft="true"-->
-<!--android:layout_marginRight="8dp" />-->
+    </LinearLayout>
 
-<!--  ListRow Left side Thumbnail image -->
-<LinearLayout android:id="@+id/artwork_layout"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:padding="3dip"
-    android:layout_alignParentLeft="true"
-    android:background="@drawable/image_bg"
-    android:layout_marginRight="5dip">
+    <!-- Title Of Song-->
+    <TextView
+        android:id="@+id/track_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/artwork_layout"
+        android:layout_toRightOf="@+id/artwork_layout"
+        android:text="Rihanna Love the way lie"
+        android:textColor="#040404"
+        android:typeface="sans"
+        android:textSize="15dip"
+        android:textStyle="bold"/>
 
-    <com.android.volley.toolbox.NetworkImageView
-        android:id="@+id/track_artwork"
-        android:layout_width="50dip"
-        android:layout_height="50dip"
-        android:src="@drawable/rihanna"/>
+    <!-- Artist Name -->
+    <TextView
+        android:id="@+id/track_artist"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/track_title"
+        android:textColor="#343434"
+        android:textSize="10dip"
+        android:layout_marginTop="1dip"
+        android:layout_toRightOf="@+id/artwork_layout"
+        android:text="Rihanna" />
 
-</LinearLayout>
+    <!-- Track Description -->
+    <TextView
+        android:id="@+id/track_description"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/track_artist"
+        android:textColor="#343434"
+        android:textSize="10dip"
+        android:layout_marginTop="1dip"
+        android:layout_toRightOf="@+id/artwork_layout"
+        android:text="Just gona stand there and ..." />
 
-<!-- Title Of Song-->
-<TextView
-    android:id="@+id/track_title"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignTop="@+id/artwork_layout"
-    android:layout_toRightOf="@+id/artwork_layout"
-    android:text="Rihanna Love the way lie"
-    android:textColor="#040404"
-    android:typeface="sans"
-    android:textSize="15dip"
-    android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/genre"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/track_description"
+        android:textColor="#343434"
+        android:textSize="10dip"
+        android:layout_marginTop="1dip"
+        android:layout_toRightOf="@+id/artwork_layout"
+        android:text="pop,pop,pop" />
 
-<!-- Artist Name -->
-<TextView
-    android:id="@+id/track_artist"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:layout_below="@id/track_title"
-    android:textColor="#343434"
-    android:textSize="10dip"
-    android:layout_marginTop="1dip"
-    android:layout_toRightOf="@+id/artwork_layout"
-    android:text="Rihanna" />
+    <!-- Right end Duration -->
+    <TextView
+        android:id="@+id/track_duration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@id/track_title"
+        android:gravity="right"
+        android:text="5:45"
+        android:layout_marginRight="5dip"
+        android:textSize="10dip"
+        android:textColor="#10bcc9"
+        android:textStyle="bold"/>
 
-<!-- Track Description -->
-<TextView
-    android:id="@+id/track_description"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:layout_below="@id/track_artist"
-    android:textColor="#343434"
-    android:textSize="10dip"
-    android:layout_marginTop="1dip"
-    android:layout_toRightOf="@+id/artwork_layout"
-    android:text="Just gona stand there and ..." />
-
-<TextView
-    android:id="@+id/genre"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:layout_below="@id/track_description"
-    android:textColor="#343434"
-    android:textSize="10dip"
-    android:layout_marginTop="1dip"
-    android:layout_toRightOf="@+id/artwork_layout"
-    android:text="pop,pop,pop" />
-
-<!-- Right end Duration -->
-<TextView
-    android:id="@+id/track_duration"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignParentRight="true"
-    android:layout_alignTop="@id/track_title"
-    android:gravity="right"
-    android:text="5:45"
-    android:layout_marginRight="5dip"
-    android:textSize="10dip"
-    android:textColor="#10bcc9"
-    android:textStyle="bold"/>
-
-<!-- Right end Arrow -->
-<ImageView android:layout_width="wrap_content"
-    android:id="@+id/play_arrow"
-    android:layout_height="wrap_content"
-    android:src="@drawable/arrow"
-    android:layout_alignParentRight="true"
-    android:layout_centerVertical="true"
-    android:visibility="invisible"/>
+    <!-- Right end Arrow -->
+    <ImageView android:layout_width="wrap_content"
+        android:id="@+id/play_arrow"
+        android:layout_height="wrap_content"
+        android:src="@drawable/arrow"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:visibility="invisible"/>
 
     <ImageView
         android:id="@+id/add_track_check"

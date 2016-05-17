@@ -1,6 +1,11 @@
 package io.coderazor.musicfiend.model;
 
+import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -36,18 +41,50 @@ public class Track {
     public Track() {
     }
 
-    public Track(String title, String id, String description, String duration, String artist, String streamURL, String artworkURL, ArrayList<String> genre, String primaryURL) {
-        this.mTitle = title;
+    public Track(String id, String title,  String description, String duration, String artist, ArrayList<String> genre, String streamURL, String artworkURL,  String primaryURL) {
         this.mId = id;
+        this.mTitle = title;
         this.mDescription = description;
-        this.mGenre = genre;
         this.mDuration = duration;
         this.mArtist = artist;
+        this.mGenre = genre;
         this.mStreamURL = streamURL;
         this.mArtworkURL = artworkURL;
         this.mPrimaryURL = primaryURL;
 
+
     }
+
+    /*
+        purpose: simple constructor using json string
+     */
+    public Track(String trackJson){
+        super();
+        try {
+            JSONObject obj = new JSONObject(trackJson);
+            this.mId = obj.optString("id");
+            this.mTitle = obj.optString("title");
+            this.mDescription = obj.optString("description");
+            Gson gson = new Gson();
+            this.mGenre = gson.fromJson(obj.getString("genre"), new TypeToken<ArrayList<String>>() {}.getType());
+            //ArrayList<String> genre = gson.fromJson(obj.getString("genre"), new TypeToken<ArrayList<String>>() {}.getType());
+//            ArrayList<String> list = new ArrayList<String>();
+//            JSONArray jsonArray = obj.getJSONArray("genre");
+//            if (jsonArray != null) {
+//                int len = jsonArray.length();
+//                for (int i=0;i<len;i++){
+//                    list.add(jsonArray.get(i).toString());
+//                }
+//            }
+            //this.mGenre = genre;
+            this.mDuration = obj.optString("duration");
+            this.mArtist = obj.optString("artist");
+            this.mStreamURL = obj.optString("stream_url");
+            this.mArtworkURL = obj.optString("artwork_url");
+            this.mPrimaryURL = obj.optString("primary_url");
+        } catch (JSONException e) {}
+    }
+
 
     public String getTitle() {
         return mTitle;

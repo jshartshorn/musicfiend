@@ -47,6 +47,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -57,6 +58,7 @@ import io.coderazor.musicfiend.dropbox.DropBoxActions;
 import io.coderazor.musicfiend.dropbox.DropBoxImageUploadAsync;
 import io.coderazor.musicfiend.dropbox.DropBoxPickerActivity;
 import io.coderazor.musicfiend.model.Playlist;
+import io.coderazor.musicfiend.model.Track;
 
 public class PlaylistDetailActivity extends BaseActivity
         implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
@@ -84,6 +86,7 @@ public class PlaylistDetailActivity extends BaseActivity
     private ImageView mStorageSelection;
     private boolean mIsNotificationMode = false;
     private String mDescription;
+    private Playlist mPlaylist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,7 +100,7 @@ public class PlaylistDetailActivity extends BaseActivity
             initializeComponents(NORMAL);
 //        }
 
-        //setUpIfEditing();
+        setUpIfEditing();
         if (getIntent().getStringExtra(AppConstant.GO_TO_CAMERA) != null) {
             callCamera();
         }
@@ -108,10 +111,13 @@ public class PlaylistDetailActivity extends BaseActivity
         if (getIntent().getStringExtra(AppConstant.ID) != null) {
             mId = getIntent().getStringExtra(AppConstant.ID);
             mIsEditing = true;
-            if (getIntent().getStringExtra(AppConstant.LIST) != null) {
-                initializeComponents(LIST);
-            }
-            setValues(mId);
+//            if (getIntent().getStringExtra(AppConstant.LIST) != null) {
+//                initializeComponents(LIST);
+//            }
+            initializeComponents(NORMAL);
+            //setValues(mId);
+            mPlaylist = getPlaylistFromDB(Integer.parseInt(mId));
+            setValues(mPlaylist);
             mStorageSelection.setEnabled(false);
         }
         if (getIntent().getStringExtra(AppConstant.REMINDER) != null) {
@@ -124,8 +130,8 @@ public class PlaylistDetailActivity extends BaseActivity
         }
     }
 
-    //
-    private void setValues(String id) {
+    //thisis based on the old uri from the notes app
+    private void setValuesOld(String id) {
         String[] projection = {BaseColumns._ID,
                 PlaylistContract.PlaylistsColumns.PLAYLISTS_TITLE,
                 PlaylistContract.PlaylistsColumns.PLAYLISTS_DESCRIPTION,
@@ -211,9 +217,9 @@ public class PlaylistDetailActivity extends BaseActivity
                 break;
             case AppConstant.DEVICE_SELECTION:
             case AppConstant.NONE_SELECTION:
-                if (!mImagePath.equals(AppConstant.NO_IMAGE)) {
-                    updateStorageSelection(null, R.drawable.ic_local, AppConstant.DEVICE_SELECTION);
-                }
+//                if (!mImagePath.equals(AppConstant.NO_IMAGE)) {
+//                    updateStorageSelection(null, R.drawable.ic_local, AppConstant.DEVICE_SELECTION);
+//                }
                 break;
             case AppConstant.DROP_BOX_SELECTION:
                 updateStorageSelection(BitmapFactory.decodeFile(mImagePath), R.drawable.ic_dropbox, AppConstant.DROP_BOX_SELECTION);
@@ -624,7 +630,10 @@ public class PlaylistDetailActivity extends BaseActivity
 
     private void editForSaveInDevice() {
         ContentValues values = createContentValues(mImagePath, AppConstant.DEVICE_SELECTION, false);
-        updatePlaylist(values);
+        //updatePlaylist(values);
+        mPlaylist.setTitle(mTitleEditText.getText().toString());
+        mPlaylist.setDescription(mDescriptionEditText.getText().toString());
+        updatePlaylistToDB(mPlaylist);
     }
 
     private void callCamera() {
@@ -843,6 +852,8 @@ public class PlaylistDetailActivity extends BaseActivity
         playlist.setTitle(mTitleEditText.getText().toString());
         playlist.setDescription(mDescriptionEditText.getText().toString());
         playlist.setJson(playlist.getJson());
+        //initialize tracks to prevent null values
+        playlist.setTracks(new ArrayList<Track>());
 
         String newId = this.savePlaylistToDB(playlist);
         playlist = getPlaylistFromDB(Integer.parseInt(newId));

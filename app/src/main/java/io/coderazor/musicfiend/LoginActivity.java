@@ -16,10 +16,6 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
-//import com.appsrox.showcase.R;
-
-//import io.coderazor.mfdev.MainActivity;
-
 
 public class LoginActivity extends AppCompatActivity {
 

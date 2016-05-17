@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
@@ -25,7 +26,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -63,7 +63,7 @@ import io.coderazor.musicfiend.model.Playlist;
 import io.coderazor.musicfiend.model.Track;
 
 public class PlaylistActivity extends BaseActivity implements ExpandableRecyclerAdapter.ExpandCollapseListener,
-        PlaylistAdapter.PlaylistSearchClickCallback, PlaylistAdapter.PlayTrackClickCallback,
+        PlaylistAdapter.PlaylistSearchClickCallback, PlaylistAdapter.PlayTrackClickCallback, PlaylistAdapter.PlaylistDeleteClickCallback,
         LoaderManager.LoaderCallbacks<Cursor>, GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener {
 
@@ -89,6 +89,9 @@ public class PlaylistActivity extends BaseActivity implements ExpandableRecycler
     private ProgressDialog pDialog;
     private ImageView mStorageSelection;
     private Toolbar mToolbar;
+
+    static private Boolean mPause = false;
+
     //private Menu
 
     @Override
@@ -104,25 +107,31 @@ public class PlaylistActivity extends BaseActivity implements ExpandableRecycler
         setUpNavigationDrawer();
         setUpActions();
 
-        //setup the actual adapter and recyclerview
         initPlaylist();
 
-        //call the background loader to init the data
         initData();
 
 
     }
 
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        //mOnRotation =true;
+        mPause = true;
+    }
+
     private void initPlaylist(){
         mRecyclerView = (RecyclerView) findViewById(R.id.list);
-        mPlaylistAdapter = new PlaylistAdapter(getApplicationContext(),mPlaylists, this, this);
+        mPlaylistAdapter = new PlaylistAdapter(getApplicationContext(),mPlaylists, this, this, this);
         mRecyclerView.setAdapter(mPlaylistAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, mRecyclerView, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                edit(view);
+                //edit(view);
             }
 
             @Override
@@ -137,19 +146,18 @@ public class PlaylistActivity extends BaseActivity implements ExpandableRecycler
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         if(item.getItemId() == R.id.action_delete) {
-                            //moveToTrash();
-                            delete(v, position);
-                            showToast("action delete");
+                            deletePlaylistFromView(v, position);
+                            //showToast("action delete");
                         } else if(item.getItemId() == R.id.action_archive) {
                             //moveToArchive(v, pos);
-                            showToast("action archive");
+                            //showToast("action archive");
                         } else if(item.getItemId() == R.id.action_edit) {
-                            //edit(v);
+                            edit(v);
                             showToast("action edit");
                         } else if(item.getItemId() == R.id.action_add) {
                             //edit(v);
                             add(v, position);
-                            showToast("action add");
+                            //showToast("action add");
                         }
 
                         return false;
@@ -163,14 +171,14 @@ public class PlaylistActivity extends BaseActivity implements ExpandableRecycler
             @Override
             public void onListItemExpanded(int position) {
                 Playlist expandedPlaylist = mPlaylists.get(position);
-                showToast("Expand");
+                //showToast("Expand");
 
             }
 
             @Override
             public void onListItemCollapsed(int position) {
                 Playlist collapsedPlaylist = mPlaylists.get(position);
-                showToast("Collapse");
+                //showToast("Collapse");
             }
         });
 
@@ -284,7 +292,18 @@ public class PlaylistActivity extends BaseActivity implements ExpandableRecycler
 
     private void initData(){
         int LOADER_ID = 1;
-        getSupportLoaderManager().initLoader(LOADER_ID,null,this);
+        if(mPause) {
+            getSupportLoaderManager().restartLoader(LOADER_ID, null, this);
+        }
+        else
+        {
+            getSupportLoaderManager().initLoader(LOADER_ID, null, this);
+        }
+    }
+
+    private void resetData(){
+        int LOADER_ID = 1;
+        getSupportLoaderManager().restartLoader(LOADER_ID,null,this);
     }
 
 
@@ -513,15 +532,13 @@ public class PlaylistActivity extends BaseActivity implements ExpandableRecycler
     @Override
     public void playTrack(Track track) {
         Log.d(LOG_NAME, "playTrack");
-        Toast.makeText(PlaylistActivity.this,
-        "action settings...",
-        Toast.LENGTH_SHORT)
-        .show();
+        showToast("playTrack callback...not implemented");
     }
 
     @Override
-    public void searchPlaylist(int position, ArrayList<Track> tracks) {
+    public void searchPlaylist(int position, Playlist playlist) {
         Log.d(LOG_NAME, "searchPlaylist");
+
         //intent with fragment
 //        TrackSearchDialogFragment dialog = new TrackSearchDialogFragment();
 //        dialog.setMenuVisibility(true);
@@ -529,23 +546,30 @@ public class PlaylistActivity extends BaseActivity implements ExpandableRecycler
 //        dialog.show(getSupportFragmentManager(), "TrackSearchDialog");
 
         //intent with activity
-//        Intent intent = new Intent(getApplicationContext(), TrackViewerActivity.class);
-//        intent.putExtra(AppConstant.GO_TO_CAMERA, AppConstant.TRUE);
-//        intent.putExtra(AppConstant.PLAYLIST_OR_REMINDER, mTitle);
-//        startActivity(intent);
-
-        //intent with activity
         Intent intent = new Intent(getApplicationContext(), TrackSearchActivity.class);
-        //intent.putExtra(AppConstant., AppConstant.TRUE);
-        intent.putExtra(AppConstant.PLAYLISTS, mTitle);
+        intent.putExtra(AppConstant.PLAYLIST_SERIALIZE, getPlaylistJson(playlist));
         startActivity(intent);
+    }
 
-        //intent not of this world
-//        Intent intent = new Intent(getApplicationContext(), HelpFeedActivity.class);
-//        intent.putExtra(AppConstant.GO_TO_CAMERA, AppConstant.TRUE);
-//        intent.putExtra(AppConstant.PLAYLIST_OR_REMINDER, mTitle);
-//        startActivity(intent);
+    @Override
+    public void searchPlaylist(int position, ArrayList<Track> tracks) {
+        //not used
+    }
 
+    @Override
+    public void deletePlaylist(Integer playistId, Integer position) {
+        //showToast("Delete Playlist from playlist activity");
+        deletePlaylistFromDB(playistId);
+        mPlaylists.remove(position);
+        mPlaylistAdapter.notifyParentItemRemoved(position);
+    }
+
+    /*
+        purpose: uses view to get the specific playlist id for deletion
+     */
+    private void deletePlaylistFromView(View v, Integer position){
+        Integer id = Integer.parseInt (((TextView)v.findViewById(R.id.id_playlist_custom_home)).getText().toString());
+        deletePlaylist(id, position);
     }
 
     @Override
@@ -581,11 +605,6 @@ public class PlaylistActivity extends BaseActivity implements ExpandableRecycler
         }
     }
 
-    //TODO: just add the persistence piece using the dataprovider
-    private void delete(View view, int position) {
-        mPlaylists.remove(position);
-        mPlaylistAdapter.notifyParentItemRemoved(position);
-    }
 
     private void edit(View view) {
         Intent intent = new Intent(PlaylistActivity.this, PlaylistDetailActivity.class);
@@ -608,6 +627,8 @@ public class PlaylistActivity extends BaseActivity implements ExpandableRecycler
         String newId = this.savePlaylistToDB(mPlaylists.get(position));
         Playlist playlist = getPlaylistFromDB(Integer.parseInt(newId));
         playlist.setId(Integer.parseInt(newId));
+        //have to ensure the id was saved to the content...not the greatest...
+        updatePlaylistToDB(playlist);
 
         mPlaylists.add(playlist);
         position = mPlaylists.size()-1;
@@ -645,7 +666,10 @@ public class PlaylistActivity extends BaseActivity implements ExpandableRecycler
         int count =0;
         if (cursor.moveToFirst()) {
             do {
-                    Playlist playlist = new Playlist(cursor.getString(1).toString());
+                Playlist playlist = new Playlist(cursor.getString(cursor.getColumnIndex(DataProvider.COL_CONTENT)).toString());
+                //ensure the id is the dbid and not something we set
+                Integer id = cursor.getInt(cursor.getColumnIndex(DataProvider.COL_ID));
+                playlist.setId(id);
                 mPlaylists.add(playlist);
                 mPlaylistAdapter.notifyParentItemInserted(count);
                 count++;
@@ -658,9 +682,26 @@ public class PlaylistActivity extends BaseActivity implements ExpandableRecycler
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
 
-        loader = null;
+        //loader = null;
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mPlaylistAdapter.notifyDataSetChanged();
+    }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        finish();
+        startActivity(getIntent());
 
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mPause= true;
+    }
 }
