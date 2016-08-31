@@ -5,7 +5,7 @@ Android music list app
 ## Introduction
 
 Portability of data is becoming more and more important with the increase of personal data. It makes sense to get 
-control of our favorite lists of things...
+control of our favorite lists of things like music playlists.
 
 ## Purpose
 
